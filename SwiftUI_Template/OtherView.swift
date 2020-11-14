@@ -14,8 +14,6 @@ struct OtherView: View {
 	
     var body: some View {
         Text("Hello, Other!")
-		
-		Text("Hello, Hell!")
     }
 }
 

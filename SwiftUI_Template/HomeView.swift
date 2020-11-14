@@ -13,16 +13,18 @@ struct HomeView: View {
 	@ObservedObject var model = HomeMV()
 	
     var body: some View {
-		Text(globalState.test)
-			.onTapGesture(perform: {
-				globalState.setValue(slice: StateSlice.test, value: "sex pistols", persist: true)
-			})
-		
-		Text("Navigate to tab")
-			.onTapGesture(perform: {
-				globalState.setValue(slice: StateSlice.activeTab, value: TabItem.other)
-			})
-
+		VStack {
+			Text(globalState.test)
+				.padding()
+				.onTapGesture(perform: {
+					globalState.setValue(slice: StateSlice.test, value: "sex pistols", persist: true)
+				})
+			
+			Text("Navigate to tab")
+				.onTapGesture(perform: {
+					globalState.setValue(slice: StateSlice.activeTab, value: TabItem.other)
+				})
+		}
     }
 }
 
