@@ -32,7 +32,6 @@ struct Tabbar: View {
 					Text("other")
 				}
 				.tag(TabItem.other)
-			
 		}
     }
 }

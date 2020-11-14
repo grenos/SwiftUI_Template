@@ -17,13 +17,13 @@ enum StateSlice: Hashable {
 class GlobalState: ObservableObject {
 	
 	@Published var test: String
-	
 	// tab navigation
-	@Published var selectedTabItem = TabItem.home
+	@Published var selectedTabItem: TabItem
 	
 	
 	init() {
 		self.test = "default value"
+		self.selectedTabItem = TabItem.home
 	}
 	
 
