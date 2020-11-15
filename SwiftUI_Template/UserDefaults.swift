@@ -40,7 +40,7 @@ struct UserDefault<T: Codable> {
 
 
 
-struct UserDefaultsConfig {
+struct Persistence {
     @UserDefault("test", defaultValue: "")
     static var test: String
     

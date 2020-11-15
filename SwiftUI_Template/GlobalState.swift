@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum Coordinator: Hashable {
+	case scrrenOne
+	case scrrenTwo
+	case none
+}
 
 enum StateSlice: Hashable {
 	case test
@@ -14,29 +19,39 @@ enum StateSlice: Hashable {
 }
 
 
-class GlobalState: ObservableObject {
+final class GlobalState: ObservableObject {
 	
+	// default state
 	@Published var test: String
+	
+	
 	// tab navigation
 	@Published var selectedTabItem: TabItem
-	
+	// coordinator
+	@Published var pushedProgrmatically: Bool
+	@Published var pushedScreen: Coordinator?
+
 	
 	init() {
-		self.test = "default value"
+		self.test = Persistence.test.count != 0 ? Persistence.test : "default value"
+		
+		// navigation and tabs
 		self.selectedTabItem = TabItem.home
+		self.pushedProgrmatically = false
+		self.pushedScreen = Coordinator.none
 	}
 	
 
 	func setValue<T: Any>(slice: StateSlice, value: T, persist: Bool? = false) {
 		switch slice {
-			case StateSlice.test:
+			case .test:
 				self.test = value as! String
 				if persist! {
-					UserDefaultsConfig.test = value as! String
+					Persistence.test = value as! String
 				}
 				
 			// Tab item navigation
-			case StateSlice.activeTab:
+			case .activeTab:
 				self.selectedTabItem = value as! TabItem
 		}
 	}
