@@ -16,6 +16,7 @@ enum Coordinator: Hashable {
 enum StateSlice: Hashable {
 	case test
 	case activeTab
+	case hideTab
 }
 
 
@@ -27,16 +28,18 @@ final class GlobalState: ObservableObject {
 	
 	// tab navigation
 	@Published var selectedTabItem: TabItem
+	@Published var hideTabbar: Bool
 	// coordinator
 	@Published var pushedProgrmatically: Bool
 	@Published var pushedScreen: Coordinator?
-
+	
 	
 	init() {
 		self.test = Persistence.test.count != 0 ? Persistence.test : "default value"
 		
 		// navigation and tabs
 		self.selectedTabItem = TabItem.home
+		self.hideTabbar = false
 		self.pushedProgrmatically = false
 		self.pushedScreen = Coordinator.none
 	}
@@ -53,6 +56,8 @@ final class GlobalState: ObservableObject {
 			// Tab item navigation
 			case .activeTab:
 				self.selectedTabItem = value as! TabItem
+			case .hideTab:
+				self.hideTabbar = value as! Bool
 		}
 	}
 }

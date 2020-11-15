@@ -6,7 +6,7 @@ target 'SwiftUI_Template' do
   use_frameworks!
 
   # Pods for SwiftUI_Template
-
+	pod "Introspect"
 
   target 'SwiftUI_TemplateTests' do
     inherit! :search_paths

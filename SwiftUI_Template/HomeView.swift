@@ -6,26 +6,30 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct HomeView: View {
 	
 	@EnvironmentObject var globalState: GlobalState
-	
+		
 	init(){}
 	
 	func willAppear() {
+		globalState.setValue(slice: StateSlice.hideTab, value: false)
 		// push programatically (can be on any view)
-		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-			self.globalState.pushedProgrmatically = true
-		}
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//			self.globalState.pushedProgrmatically = true
+//		}
 		
 		// pop programatically (can be on any view)
-		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-			self.globalState.pushedProgrmatically = false
-		}
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+//			self.globalState.pushedProgrmatically = false
+//		}
 	}
 	
-	func willDisappear() { print("disappear") }
+	func willDisappear() {
+		globalState.setValue(slice: StateSlice.hideTab, value: true)
+	}
 	
 	var body: some View {
 		NavigationView {
@@ -44,15 +48,23 @@ struct HomeView: View {
 				
 				
 				
-				// push programatically either from VM or from this view
+				// push programatically either from VM or from this view (uncomment on lifecycles)
 				NavigationLink("I can also be pushed programatically from my VM", destination: Text("Pushed programatically"), isActive: $globalState.pushedProgrmatically)
+				
 				// for multiple navigation links
-				NavigationLink(destination: Text("SECREEN ONE"), tag: Coordinator.scrrenOne, selection: $globalState.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
-				NavigationLink(destination: Text("SCREEN TWO"), tag: Coordinator.scrrenTwo, selection: $globalState.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+				NavigationLink(destination: fakeView1(), tag: Coordinator.scrrenOne, selection: $globalState.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
+				
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large), tag: Coordinator.scrrenTwo, selection: $globalState.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
 				
 			}
+			.navigationTitle("Home")
 			.onAppear { willAppear() }
 			.onDisappear { willDisappear() }
+		}
+
+		
+		.introspectTabBarController() { (UITabBarController) in
+			UITabBarController.tabBar.isHidden = globalState.hideTabbar
 		}
 	}
 }
