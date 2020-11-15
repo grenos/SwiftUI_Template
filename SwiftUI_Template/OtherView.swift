@@ -10,7 +10,6 @@ import SwiftUI
 struct OtherView: View {
 	
 	@EnvironmentObject var globalState: GlobalState
-	@ObservedObject var model = OtherMV()
 	
     var body: some View {
         Text("Hello, Other!")
