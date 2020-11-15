@@ -15,20 +15,18 @@ struct HomeView: View {
 	init(){}
 	
 	func willAppear() {
-		globalState.setValue(slice: StateSlice.hideTab, value: false)
 		// push programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//			self.globalState.pushedProgrmatically = true
+//			globalState.setValue(slice: StateSlice.pushedProgrmatically, value: true)
 //		}
 		
 		// pop programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-//			self.globalState.pushedProgrmatically = false
+//			globalState.setValue(slice: StateSlice.pushedProgrmatically, value: false)
 //		}
 	}
 	
 	func willDisappear() {
-		globalState.setValue(slice: StateSlice.hideTab, value: true)
 	}
 	
 	var body: some View {
@@ -55,16 +53,12 @@ struct HomeView: View {
 				NavigationLink(destination: fakeView1(), tag: Coordinator.scrrenOne, selection: $globalState.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
 				
 				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large), tag: Coordinator.scrrenTwo, selection: $globalState.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+					.isDetailLink(false)
 				
 			}
 			.navigationTitle("Home")
 			.onAppear { willAppear() }
 			.onDisappear { willDisappear() }
-		}
-
-		
-		.introspectTabBarController() { (UITabBarController) in
-			UITabBarController.tabBar.isHidden = globalState.hideTabbar
 		}
 	}
 }

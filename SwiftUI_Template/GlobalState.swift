@@ -16,7 +16,7 @@ enum Coordinator: Hashable {
 enum StateSlice: Hashable {
 	case test
 	case activeTab
-	case hideTab
+	case pushedProgrmatically
 }
 
 
@@ -28,7 +28,6 @@ final class GlobalState: ObservableObject {
 	
 	// tab navigation
 	@Published var selectedTabItem: TabItem
-	@Published var hideTabbar: Bool
 	// coordinator
 	@Published var pushedProgrmatically: Bool
 	@Published var pushedScreen: Coordinator?
@@ -39,7 +38,6 @@ final class GlobalState: ObservableObject {
 		
 		// navigation and tabs
 		self.selectedTabItem = TabItem.home
-		self.hideTabbar = false
 		self.pushedProgrmatically = false
 		self.pushedScreen = Coordinator.none
 	}
@@ -47,6 +45,7 @@ final class GlobalState: ObservableObject {
 
 	func setValue<T: Any>(slice: StateSlice, value: T, persist: Bool? = false) {
 		switch slice {
+			
 			case .test:
 				self.test = value as! String
 				if persist! {
@@ -56,8 +55,9 @@ final class GlobalState: ObservableObject {
 			// Tab item navigation
 			case .activeTab:
 				self.selectedTabItem = value as! TabItem
-			case .hideTab:
-				self.hideTabbar = value as! Bool
+				
+			case .pushedProgrmatically:
+				self.pushedProgrmatically = value as! Bool
 		}
 	}
 }

@@ -10,6 +10,7 @@ import SwiftUI
 enum TabItem: Hashable {
 	case home
 	case other
+	case star
 }
 
 struct Tabbar: View {
@@ -22,16 +23,23 @@ struct Tabbar: View {
 			HomeView()
 				.tabItem {
 					Image(systemName: globalState.selectedTabItem == TabItem.home ? "house.fill" : "house")
-					Text("home")
+					Text("Home")
 				}
 				.tag(TabItem.home)
-			
+				
 			OtherView()
 				.tabItem {
 					Image(systemName: globalState.selectedTabItem == TabItem.other ? "folder.fill" : "folder")
-					Text("other")
+					Text("Other")
 				}
 				.tag(TabItem.other)
+			
+			MultiView()
+				.tabItem {
+					Image(systemName: globalState.selectedTabItem == TabItem.star ? "star.fill" : "star")
+					Text("Star")
+				}
+				.tag(TabItem.star)
 		}
     }
 }
@@ -43,3 +51,4 @@ struct Tabbar_Previews: PreviewProvider {
 		Tabbar().environmentObject(GlobalState())
 	}
 }
+

@@ -11,6 +11,8 @@ struct OtherView: View {
 	
 	@EnvironmentObject var globalState: GlobalState
 	
+	@State var isPresented: Bool = false
+	
 	var body: some View {
 		
 		NavigationView {
@@ -19,17 +21,20 @@ struct OtherView: View {
 					.navigationBarTitle("Other", displayMode: .inline)
 				
 				
+				Button {
+					self.isPresented.toggle()
+				} label: {
+					Text("open modal")
+				}.sheet(isPresented: $isPresented) {
+					FakeModal(isPresented: $isPresented)
+				}
+				.padding()
+
 				
 				NavigationLink(destination: Text("SCREEN TWO")	.navigationBarTitle("Detail", displayMode: .large)) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
 			}
 		}
 	
-		
-		
-		
-		.introspectTabBarController { (UITabBarController) in
-			UITabBarController.tabBar.isHidden = false
-		}
 	}
 }
 

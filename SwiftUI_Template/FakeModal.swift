@@ -1,45 +1,49 @@
 //
-//  fakeView1.swift
+//  FakeModal.swift
 //  SwiftUI_Template
 //
 //  Created by Vasileios  Gkreen on 15/11/2020.
 //
 
 import SwiftUI
-import Introspect
 
-struct fakeView1: View {
+struct FakeModal: View {
 	
 	@EnvironmentObject var globalState: GlobalState
-		
+	
+	@Binding var isPresented: Bool
+	
 	func willAppear() {
 	}
 	
 	func willDisappear() {
 	}
 	
-    var body: some View {
+	var body: some View {
 		NavigationView {
 			VStack {
-				Spacer()
-				Text("FAKE VIEW RED")
+				Text("FAKE VIEW MODAL")
 					.padding(.bottom, 40)
 				
 				
-
+				Text("Close Modal")
+					.onTapGesture {
+						self.isPresented.toggle()
+					}
+				
 				
 			}
 			.onAppear { willAppear() }
 			.onDisappear { willDisappear() }
-
+			
 		}
-		.navigationBarTitle("Detail", displayMode: .inline)
-	
+		.navigationBarTitle("Modal", displayMode: .inline)
+		
 	}
 }
 
-struct fakeView1_Previews: PreviewProvider {
+struct FakeModal_Previews: PreviewProvider {
     static var previews: some View {
-        fakeView1()
+        FakeModal(isPresented: .constant(true))
     }
 }
