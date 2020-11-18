@@ -18,7 +18,6 @@ struct OtherView: View {
 		NavigationView {
 			VStack {
 				
-				
 				Text("Set Document")
 					.padding(.bottom, 10)
 					.onTapGesture {
@@ -50,7 +49,9 @@ struct OtherView: View {
 				Text("Update Document field")
 					.padding(.bottom, 10)
 					.onTapGesture {
-						
+						let path = db.collection("testCollection").document("testDocument")
+						FBFirestoreManager.shared.updateDocumentField(for: path, document: ["name": "Vas + Giuli"]) { _ in
+						}
 					}
 				
 				Text("Batch operations")

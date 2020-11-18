@@ -17,6 +17,7 @@ class FBFirestoreManager {
 	static let shared = FBFirestoreManager()
 	
 	
+	
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
