@@ -25,6 +25,7 @@
 		7DCD49E125650A2C00AC64DE /* FBFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */; };
 		7DCD49E625650DD300AC64DE /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E525650DD300AC64DE /* FBError.swift */; };
 		7DCD4A042565382E00AC64DE /* FBDemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD4A032565382E00AC64DE /* FBDemoModel.swift */; };
+		7DCD4A0C2565807600AC64DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DCD4A0B2565807600AC64DE /* GoogleService-Info.plist */; };
 		7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17AB4256159C80090CDE8 /* fakeView1.swift */; };
 		7DF17ADD256196510090CDE8 /* FakeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17ADC256196510090CDE8 /* FakeModal.swift */; };
 		7DF17AE2256198120090CDE8 /* MultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17AE1256198120090CDE8 /* MultiView.swift */; };
@@ -78,6 +79,7 @@
 		7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFirestoreManager.swift; sourceTree = "<group>"; };
 		7DCD49E525650DD300AC64DE /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
 		7DCD4A032565382E00AC64DE /* FBDemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDemoModel.swift; sourceTree = "<group>"; };
+		7DCD4A0B2565807600AC64DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DF17AB4256159C80090CDE8 /* fakeView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeView1.swift; sourceTree = "<group>"; };
 		7DF17ADC256196510090CDE8 /* FakeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeModal.swift; sourceTree = "<group>"; };
 		7DF17AE1256198120090CDE8 /* MultiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,8 @@
 		7D942FA0256014BB00C6A0DD /* SwiftUI_Template */ = {
 			isa = PBXGroup;
 			children = (
+				7DCD4A0B2565807600AC64DE /* GoogleService-Info.plist */,
+				7DCD4A0825657F5200AC64DE /* FirebaseServices */,
 				7D942FA1256014BB00C6A0DD /* AppDelegate.swift */,
 				7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */,
 				7D942FA5256014BB00C6A0DD /* AppEntry.swift */,
@@ -166,9 +170,7 @@
 				7D942FAC256014BC00C6A0DD /* LaunchScreen.storyboard */,
 				7D942FAF256014BC00C6A0DD /* Info.plist */,
 				7D942FA9256014BC00C6A0DD /* Preview Content */,
-				7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */,
 				7DCD4A032565382E00AC64DE /* FBDemoModel.swift */,
-				7DCD49E525650DD300AC64DE /* FBError.swift */,
 			);
 			path = SwiftUI_Template;
 			sourceTree = "<group>";
@@ -197,6 +199,31 @@
 				7D942FC5256014BD00C6A0DD /* Info.plist */,
 			);
 			path = SwiftUI_TemplateUITests;
+			sourceTree = "<group>";
+		};
+		7DCD4A0825657F5200AC64DE /* FirebaseServices */ = {
+			isa = PBXGroup;
+			children = (
+				7DCD4A0A25657F6F00AC64DE /* Utilities */,
+				7DCD4A0925657F6500AC64DE /* Firestore */,
+			);
+			path = FirebaseServices;
+			sourceTree = "<group>";
+		};
+		7DCD4A0925657F6500AC64DE /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		7DCD4A0A25657F6F00AC64DE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7DCD49E525650DD300AC64DE /* FBError.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		E5A004F55D5FC73C6B1EE7A6 /* Frameworks */ = {
@@ -317,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D942FAE256014BC00C6A0DD /* LaunchScreen.storyboard in Resources */,
+				7DCD4A0C2565807600AC64DE /* GoogleService-Info.plist in Resources */,
 				7D942FAB256014BC00C6A0DD /* Preview Assets.xcassets in Resources */,
 				7D942FA8256014BC00C6A0DD /* Assets.xcassets in Resources */,
 			);

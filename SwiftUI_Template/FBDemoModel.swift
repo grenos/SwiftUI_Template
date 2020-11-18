@@ -5,24 +5,21 @@
 //  Created by Vasileios  Gkreen on 18/11/2020.
 //
 
-import Foundation
 
+import SwiftUI
 
-
-public struct City: Codable {
+public struct FBDemoModel: Codable {
 	
 	let name: String
 	let state: String?
-	let country: String?
 	let isCapital: Bool?
-	let population: Int64?
+	let age: Int64?
 	
 	enum CodingKeys: String, CodingKey {
 		case name
 		case state
-		case country
 		case isCapital = "capital"
-		case population
+		case age
 	}
 	
 }

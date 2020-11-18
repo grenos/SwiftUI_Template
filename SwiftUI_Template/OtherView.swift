@@ -17,6 +17,63 @@ struct OtherView: View {
 		
 		NavigationView {
 			VStack {
+				
+				
+				Text("Set Document")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						let path = db.collection("testCollection").document("testDocument")
+						let testDoc = FBDemoModel(
+							name: "Vas",
+							state: nil,
+							isCapital: nil,
+							age: 35
+						)
+						FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) { _ in
+						}
+					}
+				
+				Text("Add Document")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						let path = db.collection("testCollection")
+						let testDoc = FBDemoModel(
+							name: "Vas",
+							state: nil,
+							isCapital: nil,
+							age: 35
+						)
+						FBFirestoreManager.shared.addDocument(for: path, document: testDoc) { _ in
+						}
+					}
+				
+				Text("Update Document field")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						
+					}
+				
+				Text("Batch operations")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						
+					}
+				
+				Text("Delete Document")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						
+					}
+				
+				Text("Delete Document field")
+					.padding(.bottom, 10)
+					.onTapGesture {
+						
+					}
+				
+				
+				
+				
 				Text("Hello, Other!")
 					.navigationBarTitle("Other", displayMode: .inline)
 				
@@ -31,7 +88,7 @@ struct OtherView: View {
 				.padding()
 
 				
-				NavigationLink(destination: Text("SCREEN TWO")	.navigationBarTitle("Detail", displayMode: .large)) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large)) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
 			}
 		}
 	
