@@ -118,9 +118,7 @@ class FBFirestoreManager {
 				which in turn every array contains dictionaries
 				with the document and path to operate to
 	
-	
 	It can be used with set update or delete.
-	
 	*/
 	func batchOperations(for payload: [String : [[String : Any]]],
 						 completion: @escaping (Result<Void.Type, FBError>) -> Void)
@@ -132,15 +130,19 @@ class FBFirestoreManager {
 		guard let delete = payload["delete"] else { return }
 		
 		for document in create {
-			batch.setData(document["document"] as! [String : Any], forDocument: document["path"] as! DocumentReference, merge: document["merge"] as! Bool)
+			batch.setData(document["document"] as! [String : Any],
+						  forDocument: document["path"] as! DocumentReference,
+						  merge: document["merge"] as! Bool)
 		}
 		
 		for document in update {
-			batch.setData(document["document"] as! [String : Any], forDocument: document["path"] as! DocumentReference)
+			batch.setData(document["document"] as! [String : Any],
+						  forDocument: document["path"] as! DocumentReference)
 		}
 		
 		for document in delete {
-			batch.setData(document["document"] as! [String : Any], forDocument: document["path"] as! DocumentReference)
+			batch.setData(document["document"] as! [String : Any],
+						  forDocument: document["path"] as! DocumentReference)
 		}
 		
 		batch.commit() { error in
@@ -157,6 +159,54 @@ class FBFirestoreManager {
 
 	
 	
+	
+	/**
+	- returns: Void
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore DocumentReference
+	
+	Deletes a document
+	*/
+	func deleteDocument(for path: DocumentReference,
+						completion: @escaping (Result<Void.Type, FBError>) -> Void)
+	{
+		path.delete() { error in
+			if let error = error {
+				print("Error deleting document: \(error)")
+				completion(.failure(.genericOperationError))
+			} else {
+				print("Document successfully removed!")
+				completion(.success(Void.self))
+			}
+		}
+	}
+	
+	
+	
+	/**
+	- returns: Void
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore DocumentReference
+	- documentField: Document fiekd to be deleted
+	
+	Deletes a document field
+	*/
+	func deleteDocumentField(for path: DocumentReference,
+							 documentField: [String : Any],
+							 completion: @escaping (Result<Void.Type, FBError>) -> Void)
+	{
+		path.updateData(documentField) { error in
+			if let error = error {
+				print("Error deleting field: \(error)")
+				completion(.failure(.genericOperationError))
+			} else {
+				print("Field successfully removed!")
+				completion(.success(Void.self))
+			}
+		}
+	}
 	
 	
 
