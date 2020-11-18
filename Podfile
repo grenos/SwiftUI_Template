@@ -7,6 +7,9 @@ target 'SwiftUI_Template' do
 
   # Pods for SwiftUI_Template
 	pod "Introspect"
+	
+	pod 'FirebaseFirestoreSwift'
+	pod 'Firebase/Firestore'
 
   target 'SwiftUI_TemplateTests' do
     inherit! :search_paths

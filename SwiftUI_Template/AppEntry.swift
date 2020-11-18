@@ -10,7 +10,7 @@ import SwiftUI
 struct AppEntry: View {
 	
 	@EnvironmentObject var globalState: GlobalState
-	
+		
     var body: some View {
 		Tabbar()
     }
