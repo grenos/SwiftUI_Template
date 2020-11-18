@@ -121,31 +121,32 @@ class FBFirestoreManager {
 	
 	It can be used with set update or delete.
 	*/
-	func batchOperations(for payload: [String : [[String : Any]]],
+	func batchOperations(for payload: [String : [[String : Any]] ],
 						 completion: @escaping (Result<Void.Type, FBError>) -> Void)
 	{
 		let batch = db.batch()
 		
-		guard let create = payload["create"] else { return }
-		guard let update = payload["update"] else { return }
-		guard let delete = payload["delete"] else { return }
-		
-		for document in create {
-			batch.setData(document["document"] as! [String : Any],
-						  forDocument: document["path"] as! DocumentReference,
-						  merge: document["merge"] as! Bool)
+		if let create = payload["create"] {
+			for document in create {
+				batch.setData(document["document"] as! [String : Any],
+							  forDocument: document["path"] as! DocumentReference,
+							  merge: document["merge"] as! Bool)
+			}
 		}
 		
-		for document in update {
-			batch.setData(document["document"] as! [String : Any],
-						  forDocument: document["path"] as! DocumentReference)
+		if let update = payload["update"] {
+			for document in update {
+				batch.updateData(document["document"] as! [String : Any],
+								 forDocument: document["path"] as! DocumentReference)
+			}
 		}
 		
-		for document in delete {
-			batch.setData(document["document"] as! [String : Any],
-						  forDocument: document["path"] as! DocumentReference)
+		if let delete = payload["delete"] {
+			for document in delete {
+				batch.deleteDocument(document["path"] as! DocumentReference)
+			}
 		}
-		
+
 		batch.commit() { error in
 			if let error = error {
 				print("Error on batch operation: \(error)")

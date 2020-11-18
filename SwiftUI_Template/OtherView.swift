@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct OtherView: View {
 	
@@ -28,8 +29,7 @@ struct OtherView: View {
 							isCapital: nil,
 							age: 35
 						)
-						FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) { _ in
-						}
+						FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) {_ in }
 					}
 				
 				Text("Add Document")
@@ -50,26 +50,54 @@ struct OtherView: View {
 					.padding(.bottom, 10)
 					.onTapGesture {
 						let path = db.collection("testCollection").document("testDocument")
-						FBFirestoreManager.shared.updateDocumentField(for: path, document: ["name": "Vas + Giuli"]) { _ in
-						}
+						FBFirestoreManager.shared.updateDocumentField(for: path, document: ["name": "Vas + Giuli"]) { _ in }
 					}
 				
 				Text("Batch operations")
 					.padding(.bottom, 10)
 					.onTapGesture {
+						let path = db.collection("testCollection").document("testDocument")
+						let path1 = db.collection("testCollection").document("testDocument1")
+						let path2 = db.collection("testCollection").document("testDocument2")
 						
+						let testDoc = [
+							"name": "Sex Pistols",
+							"state": nil,
+							"isCapital": nil,
+							"age": 69
+						] as [String : Any?]
+						
+						let batch = [
+							"create": [
+								[
+								"document": testDoc,
+								"path": path,
+								"merge": true
+								]
+							],
+							"update": [
+								[
+								"document": ["state": "Hell"],
+								"path": path1,
+								]
+							],
+							"delete": [["path": path2]]
+						]
+						FBFirestoreManager.shared.batchOperations(for: batch) { _ in }
 					}
 				
 				Text("Delete Document")
 					.padding(.bottom, 10)
 					.onTapGesture {
-						
+						let path = db.collection("testCollection").document("testDocument")
+						FBFirestoreManager.shared.deleteDocument(for: path) { _ in }
 					}
 				
 				Text("Delete Document field")
 					.padding(.bottom, 10)
 					.onTapGesture {
-						
+						let path = db.collection("testCollection").document("testDocument")
+						FBFirestoreManager.shared.deleteDocumentField(for: path, documentField: ["age" : FieldValue.delete()]) { _ in }
 					}
 				
 				
