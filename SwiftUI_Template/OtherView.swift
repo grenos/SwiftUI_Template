@@ -20,71 +20,82 @@ struct OtherView: View {
 			
 			ScrollView {
 				
-				Text("Set Document")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						let path = db.collection("testCollection").document("testDocument")
-						let testDoc = FBDemoModel(
-							name: "Vas",
-							state: nil,
-							isCapital: nil,
-							age: 35
-						)
-						FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) {_ in }
-					}
-				
-				Text("Add Document")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						let path = db.collection("testCollection")
-						let testDoc = FBDemoModel(
-							name: "Vas",
-							state: nil,
-							isCapital: nil,
-							age: 35
-						)
-						FBFirestoreManager.shared.addDocument(for: path, document: testDoc) { _ in
+				Group {
+					
+					Text("Set Document")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							let path = db.collection("testCollection").document("testDocument")
+							let testDoc = FBDemoModel(
+								name: "Vas",
+								state: nil,
+								isCapital: nil,
+								age: 35
+							)
+							FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) {_ in }
 						}
-					}
+					
+					Text("Add Document")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							let path = db.collection("testCollection")
+							let testDoc = FBDemoModel(
+								name: "Vas",
+								state: nil,
+								isCapital: nil,
+								age: 35
+							)
+							FBFirestoreManager.shared.addDocument(for: path, document: testDoc) { _ in
+							}
+						}
+					
+					Text("Update Document field")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							let path = db.collection("testCollection").document("testDocument")
+							FBFirestoreManager.shared.updateDocumentField(for: path, document: ["name": "Vas + Giuli"]) { _ in }
+						}
+					
+					Text("Batch operations")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							self.batchOperation()
+						}
+					
+					Text("Delete Document")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							let path = db.collection("testCollection").document("testDocument")
+							FBFirestoreManager.shared.deleteDocument(for: path) { _ in }
+						}
+					
+					Text("Delete Document field")
+						.padding(.bottom, 10)
+						.onTapGesture {
+							let path = db.collection("testCollection").document("testDocument")
+							FBFirestoreManager.shared.deleteDocumentField(for: path, documentField: ["age" : FieldValue.delete()]) { _ in }
+						}
+					
+				}
 				
-				Text("Update Document field")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						let path = db.collection("testCollection").document("testDocument")
-						FBFirestoreManager.shared.updateDocumentField(for: path, document: ["name": "Vas + Giuli"]) { _ in }
-					}
-				
-				Text("Batch operations")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						self.batchOperation()
-					}
-				
-				Text("Delete Document")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						let path = db.collection("testCollection").document("testDocument")
-						FBFirestoreManager.shared.deleteDocument(for: path) { _ in }
-					}
-				
-				Text("Delete Document field")
-					.padding(.bottom, 10)
-					.onTapGesture {
-						let path = db.collection("testCollection").document("testDocument")
-						FBFirestoreManager.shared.deleteDocumentField(for: path, documentField: ["age" : FieldValue.delete()]) { _ in }
-					}
+				Group {
+					Text("Get Single document")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.getSingleDocument()
+						}
+					
+					
+					Text("Get all documents in collection")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.getAllDocsInCollection()
+						}
+				}
 				
 				
-				
-				Text("Get Single document")
-					.padding()
-					.foregroundColor(.red)
-					.onTapGesture {
-						self.getSingleDocument()
-					}
-				
-				
-								
 				
 				Text("Hello, Other!")
 					.navigationBarTitle("Other", displayMode: .inline)
@@ -100,7 +111,10 @@ struct OtherView: View {
 				.padding()
 				
 				
-				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large)) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large)) {
+					Rectangle().fill(Color.green).frame(width: 100, height: 100)
+				}
+				
 			}
 		}
 		
@@ -115,7 +129,7 @@ extension OtherView {
 		FBFirestoreManager.shared.getDocument(for: path) { result in
 			switch result {
 				case .success(let document):
-					FBDemoModel.castFirestoreDocument(for: document) { result in
+					FBDemoModel.castDocument(for: document) { result in
 						switch result {
 							case .success(let document):
 								print("document: \(document)")
@@ -125,7 +139,7 @@ extension OtherView {
 						}
 					}
 				case .failure(let error):
-					print("Error decoding city: \(error)")
+					print("Error getting document: \(error)")
 			}
 		}
 	}
@@ -161,6 +175,28 @@ extension OtherView {
 		]
 		
 		FBFirestoreManager.shared.batchOperations(for: batch) { _ in }
+	}
+	
+	
+	
+	func getAllDocsInCollection() {
+		let path = db.collection("testCollection")
+		FBFirestoreManager.shared.getAllDocumentsInCollection(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+								
+							case .failure(let error):
+								print("Error decoding city: \(error)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error)")
+			}
+		}
 	}
 }
 

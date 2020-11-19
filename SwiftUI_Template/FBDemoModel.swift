@@ -25,9 +25,8 @@ public struct FBDemoModel: Codable, Identifiable {
 	}
 	
 	
-	
 	// Decode a FBDemoModel document coming from Firestore
-	static func castFirestoreDocument(for document: DocumentSnapshot,
+	static func castDocument(for document: DocumentSnapshot,
 										completion: @escaping (Result<FBDemoModel, FBError>) -> Void)
 	{
 		let result = Result {
@@ -42,9 +41,36 @@ public struct FBDemoModel: Codable, Identifiable {
 					completion(.failure(.genericOperationError))
 				}
 			case .failure(let error):
-				print("Error decoding city: \(error)")
+				print("Error decoding city: \(error.localizedDescription)")
 				completion(.failure(.genericOperationError))
 		}
 	}
 	
+	
+	
+	static func castDocuments(for collection: QuerySnapshot,
+							  completion: @escaping (Result<[FBDemoModel], FBError>) -> Void)
+	{
+		var documents = [FBDemoModel]()
+		
+		for document in collection.documents {
+			let result = Result {
+				try document.data(as: FBDemoModel.self)
+			}
+			switch result {
+				case .success(let document):
+					if let city = document {
+						documents.append(city)
+					} else {
+						print("Document does not exist")
+					}
+				case .failure(let error):
+					print("Error decoding city: \(error.localizedDescription)")
+					completion(.failure(.genericOperationError))
+			}
+		}
+		completion(.success(documents))
+	}
+	
+
 }

@@ -41,7 +41,7 @@ class FBFirestoreManager {
 				completion(.success(Void.self))
 			}
 		} catch let error {
-			print("Error setting document: \(error)")
+			print("Error setting document: \(error.localizedDescription)")
 			completion(.failure(.genericOperationError))
 		}
 	}
@@ -69,7 +69,7 @@ class FBFirestoreManager {
 				completion(.success(ref!.documentID))
 			})
 		} catch let error {
-			print("Error setting document: \(error)")
+			print("Error setting document: \(error.localizedDescription)")
 			completion(.failure(.genericOperationError))
 		}
 	}
@@ -98,7 +98,7 @@ class FBFirestoreManager {
 	{
 		path.updateData(document) { error in
 			if let error = error {
-				print("Error updating document: \(error)")
+				print("Error updating document: \(error.localizedDescription)")
 				completion(.failure(.genericOperationError))
 			} else {
 				print("Succesfully updated document to firestore")
@@ -149,7 +149,7 @@ class FBFirestoreManager {
 
 		batch.commit() { error in
 			if let error = error {
-				print("Error on batch operation: \(error)")
+				print("Error on batch operation: \(error.localizedDescription)")
 				completion(.failure(.genericOperationError))
 			} else {
 				print("Succesfully completed batch operation")
@@ -175,7 +175,7 @@ class FBFirestoreManager {
 	{
 		path.delete() { error in
 			if let error = error {
-				print("Error deleting document: \(error)")
+				print("Error deleting document: \(error.localizedDescription)")
 				completion(.failure(.genericOperationError))
 			} else {
 				print("Document successfully removed!")
@@ -201,7 +201,7 @@ class FBFirestoreManager {
 	{
 		path.updateData(documentField) { error in
 			if let error = error {
-				print("Error deleting field: \(error)")
+				print("Error deleting field: \(error.localizedDescription)")
 				completion(.failure(.genericOperationError))
 			} else {
 				print("Field successfully removed!")
@@ -228,13 +228,35 @@ class FBFirestoreManager {
 			if let document = document, document.exists {
 				completion(.success(document))
 			} else {
-				print("Document does not exist")
+				print("Document does not exist: \(String(describing: error?.localizedDescription))")
 				completion(.failure(.genericOperationError))
 			}
 		}
 	}
 	
 	
+	
+	
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore CollectionReference
+	
+	Retrieves all documents from firestore collection
+	*/
+	func getAllDocumentsInCollection(for path: CollectionReference,
+									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+	{
+		path.getDocuments() { (querySnapshot, error) in
+			if let error = error {
+				print("Error getting documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
 
 	
 }
