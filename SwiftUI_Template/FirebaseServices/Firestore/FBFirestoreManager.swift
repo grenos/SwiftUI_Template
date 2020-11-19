@@ -211,6 +211,30 @@ class FBFirestoreManager {
 	}
 	
 	
+	
+	
+	/**
+	- returns: DocumentSnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore DocumentReference
+	
+	Retrieves a single document from firestore
+	*/
+	func getDocument(for path: DocumentReference,
+					 completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void)
+	{
+		path.getDocument { (document, error) in
+			if let document = document, document.exists {
+				completion(.success(document))
+			} else {
+				print("Document does not exist")
+				completion(.failure(.genericOperationError))
+			}
+		}
+	}
+	
+	
 
 	
 }

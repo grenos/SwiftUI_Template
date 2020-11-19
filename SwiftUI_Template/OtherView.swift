@@ -17,7 +17,8 @@ struct OtherView: View {
 	var body: some View {
 		
 		NavigationView {
-			VStack {
+			
+			ScrollView {
 				
 				Text("Set Document")
 					.padding(.bottom, 10)
@@ -63,22 +64,22 @@ struct OtherView: View {
 						let testDoc = [
 							"name": "Sex Pistols",
 							"state": nil,
-							"isCapital": nil,
+							"capital": nil,
 							"age": 69
 						] as [String : Any?]
 						
 						let batch = [
 							"create": [
 								[
-								"document": testDoc,
-								"path": path,
-								"merge": true
+									"document": testDoc,
+									"path": path,
+									"merge": true
 								]
 							],
 							"update": [
 								[
-								"document": ["state": "Hell"],
-								"path": path1,
+									"document": ["state": "Hell"],
+									"path": path1,
 								]
 							],
 							"delete": [["path": path2]]
@@ -102,6 +103,46 @@ struct OtherView: View {
 				
 				
 				
+				Text("Get Single document")
+					.padding()
+					.foregroundColor(.red)
+					.onTapGesture {
+						let path = db.collection("testCollection").document("testDocument")
+						FBFirestoreManager.shared.getDocument(for: path) { result in
+							switch result {
+								case .success(let document):
+									
+									
+									let result = Result {
+										try document.data(as: FBDemoModel.self)
+									}
+									
+									switch result {
+										case .success(let document):
+											if let city = document {
+												// A `City` value was successfully initialized from the DocumentSnapshot.
+												print("City: \(city)")
+											} else {
+												// A nil value was successfully initialized from the DocumentSnapshot,
+												// or the DocumentSnapshot was nil.
+												print("Document does not exist")
+											}
+										case .failure(let error):
+											// A `City` value could not be initialized from the DocumentSnapshot.
+											print("Error decoding city: \(error)")
+									}
+									
+									
+								case .failure(let error):
+									print("Error decoding city: \(error)")
+							}
+						}
+					}
+				
+				
+			
+				
+				
 				
 				Text("Hello, Other!")
 					.navigationBarTitle("Other", displayMode: .inline)
@@ -115,12 +156,12 @@ struct OtherView: View {
 					FakeModal(isPresented: $isPresented)
 				}
 				.padding()
-
+				
 				
 				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large)) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
 			}
 		}
-	
+		
 	}
 }
 
