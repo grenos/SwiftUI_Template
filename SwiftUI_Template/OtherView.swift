@@ -13,6 +13,16 @@ struct OtherView: View {
 	@EnvironmentObject var globalState: GlobalState
 	
 	@State var isPresented: Bool = false
+	@State var documentListener: ListenerRegistration?
+	@State var documentsListener: ListenerRegistration?
+	
+	
+	func viewWillAppear() {}
+	
+	func viewWillDisappear() {
+		self.documentListener?.remove()
+		self.documentsListener?.remove()
+	}
 	
 	var body: some View {
 		
@@ -93,6 +103,14 @@ struct OtherView: View {
 						.onTapGesture {
 							self.getAllDocsInCollection()
 						}
+					
+					
+					Text("Listen for changes in document")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.listenSingleDocument()
+						}
 				}
 				
 				
@@ -116,6 +134,8 @@ struct OtherView: View {
 				}
 				
 			}
+			.onAppear { self.viewWillAppear() }
+			.onDisappear { self.viewWillDisappear() }
 		}
 		
 	}
@@ -198,6 +218,28 @@ extension OtherView {
 			}
 		}
 	}
+	
+	
+	func listenSingleDocument() {
+		let path = db.collection("testCollection").document("testDocument")
+		self.documentListener = FBFirestoreManager.shared.listenForDocument(for: path, completion: { result in
+			switch result {
+				case .success(let document):
+					FBDemoModel.castDocument(for: document) { result in
+						switch result {
+							case .success(let document):
+								print("document listener: \(document)")
+								
+							case .failure(let error):
+								print("Error decoding city: \(error)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting document: \(error)")
+			}
+		})
+	}
+	
 }
 
 

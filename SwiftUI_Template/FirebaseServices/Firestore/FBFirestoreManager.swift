@@ -108,7 +108,6 @@ class FBFirestoreManager {
 	}
 	
 	
-
 	
 	
 	/**
@@ -116,8 +115,8 @@ class FBFirestoreManager {
 	- throws: Error of type "FBError"
 	- parameters:
 	- payload: a dictionary that contains arrays of categorized operations based on CRUD
-				which in turn every array contains dictionaries
-				with the document and path to operate to
+	which in turn every array contains dictionaries
+	with the document and path to operate to
 	
 	It can be used with set update or delete.
 	*/
@@ -146,7 +145,7 @@ class FBFirestoreManager {
 				batch.deleteDocument(document["path"] as! DocumentReference)
 			}
 		}
-
+		
 		batch.commit() { error in
 			if let error = error {
 				print("Error on batch operation: \(error.localizedDescription)")
@@ -158,7 +157,7 @@ class FBFirestoreManager {
 		}
 	}
 	
-
+	
 	
 	
 	
@@ -257,7 +256,35 @@ class FBFirestoreManager {
 			}
 		}
 	}
-
+	
+	
+	
+	/**
+	- returns: DocumentSnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore DocumentReference
+	
+	Listens to a document in Firestore
+	*/
+	func listenForDocument(for path: DocumentReference,
+							completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void) -> ListenerRegistration?
+	{
+		path.addSnapshotListener { documentSnapshot, error in
+			guard let document = documentSnapshot else {
+				print("Error fetching document: \(String(describing: error?.localizedDescription))")
+				completion(.failure(.genericOperationError))
+				return
+			}
+			guard document.data() != nil else {
+				print("Document data was empty.")
+				completion(.failure(.genericOperationError))
+				return
+			}
+			completion(.success(document))
+		}
+	}
+	
 	
 }
 
