@@ -25,7 +25,6 @@ final class GlobalState: ObservableObject {
 	// default state
 	@Published var test: String
 	
-	
 	// tab navigation
 	@Published var selectedTabItem: TabItem
 	// coordinator
@@ -43,6 +42,7 @@ final class GlobalState: ObservableObject {
 	}
 	
 
+	// Reducer
 	func setValue<T: Any>(slice: StateSlice, value: T, persist: Bool? = false) {
 		switch slice {
 			

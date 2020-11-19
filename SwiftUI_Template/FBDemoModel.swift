@@ -25,8 +25,10 @@ public struct FBDemoModel: Codable, Identifiable {
 	}
 	
 	
-	func castFirestoreDocument(for document: DocumentSnapshot,
-							   completion: @escaping (Result<FBDemoModel.Type, FBError>) -> Void)
+	
+	// Decode a FBDemoModel document coming from Firestore
+	static func castFirestoreDocument(for document: DocumentSnapshot,
+										completion: @escaping (Result<FBDemoModel, FBError>) -> Void)
 	{
 		let result = Result {
 			try document.data(as: FBDemoModel.self)
@@ -34,16 +36,14 @@ public struct FBDemoModel: Codable, Identifiable {
 		switch result {
 			case .success(let document):
 				if let city = document {
-					// A `City` value was successfully initialized from the DocumentSnapshot.
-					print("City: \(city)")
+					completion(.success(city))
 				} else {
-					// A nil value was successfully initialized from the DocumentSnapshot,
-					// or the DocumentSnapshot was nil.
 					print("Document does not exist")
+					completion(.failure(.genericOperationError))
 				}
 			case .failure(let error):
-				// A `City` value could not be initialized from the DocumentSnapshot.
 				print("Error decoding city: \(error)")
+				completion(.failure(.genericOperationError))
 		}
 	}
 	
