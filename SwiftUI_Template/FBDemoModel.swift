@@ -27,7 +27,7 @@ public struct FBDemoModel: Codable, Identifiable {
 	
 	// Decode a FBDemoModel document coming from Firestore
 	static func castDocument(for document: DocumentSnapshot,
-										completion: @escaping (Result<FBDemoModel, FBError>) -> Void)
+							 completion: @escaping (Result<FBDemoModel, FBError>) -> Void)
 	{
 		let result = Result {
 			try document.data(as: FBDemoModel.self)

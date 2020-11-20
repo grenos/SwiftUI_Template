@@ -144,27 +144,6 @@ struct OtherView: View {
 
 extension OtherView {
 	
-	func getSingleDocument() {
-		let path = db.collection("testCollection").document("testDocument")
-		FBFirestoreManager.shared.getDocument(for: path) { result in
-			switch result {
-				case .success(let document):
-					FBDemoModel.castDocument(for: document) { result in
-						switch result {
-							case .success(let document):
-								print("document: \(document)")
-								
-							case .failure(let error):
-								print("Error decoding city: \(error)")
-						}
-					}
-				case .failure(let error):
-					print("Error getting document: \(error)")
-			}
-		}
-	}
-	
-	
 	func batchOperation() {
 		let path = db.collection("testCollection").document("testDocument")
 		let path1 = db.collection("testCollection").document("testDocument1")
@@ -198,6 +177,25 @@ extension OtherView {
 	}
 	
 	
+	func getSingleDocument() {
+		let path = db.collection("testCollection").document("testDocument")
+		FBFirestoreManager.shared.getDocument(for: path) { result in
+			switch result {
+				case .success(let document):
+					FBDemoModel.castDocument(for: document) { result in
+						switch result {
+							case .success(let document):
+								print("document: \(document)")
+								
+							case .failure(let error):
+								print("Error decoding city: \(error)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting document: \(error)")
+			}
+		}
+	}
 	
 	func getAllDocsInCollection() {
 		let path = db.collection("testCollection")
