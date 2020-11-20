@@ -293,5 +293,31 @@ class FBFirestoreManager {
 	}
 	
 	
+	
+	
+	
+	//MARK: - listenAllDocumentsInCollection
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore CollectionReference
+	
+	Listens to all documents in Firestore collection
+	*/
+	func listenAllDocumentsInCollection(for path: CollectionReference,
+						   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+	{
+		path.addSnapshotListener { querySnapshot, error in
+			if let error = error {
+				print("Error listening for documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
+	
+	
 }
 

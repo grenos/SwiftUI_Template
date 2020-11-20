@@ -111,6 +111,13 @@ struct OtherView: View {
 						.onTapGesture {
 							self.listenSingleDocument()
 						}
+					
+					Text("Listen all documents in collection")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.listenAllDocumentsInCollection()
+						}
 				}
 				
 				
@@ -186,7 +193,6 @@ extension OtherView {
 						switch result {
 							case .success(let document):
 								print("document: \(document)")
-								
 							case .failure(let error):
 								print("Error decoding city: \(error)")
 						}
@@ -206,7 +212,6 @@ extension OtherView {
 						switch result {
 							case .success(let documentArray):
 								print("document: \(documentArray)")
-								
 							case .failure(let error):
 								print("Error decoding city: \(error)")
 						}
@@ -227,7 +232,6 @@ extension OtherView {
 						switch result {
 							case .success(let document):
 								print("document listener: \(document)")
-								
 							case .failure(let error):
 								print("Error decoding city: \(error)")
 						}
@@ -236,6 +240,26 @@ extension OtherView {
 					print("Error getting document: \(error)")
 			}
 		})
+	}
+	
+	
+	func listenAllDocumentsInCollection() {
+		let path = db.collection("testCollection")
+		self.documentsListener = FBFirestoreManager.shared.listenAllDocumentsInCollection(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+							case .failure(let error):
+								print("Error decoding city: \(error)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error)")
+			}
+		}
 	}
 	
 }
