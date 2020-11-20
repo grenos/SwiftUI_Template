@@ -9,13 +9,13 @@
 import SwiftUI
 import FirebaseFirestore
 
-public struct FBDemoModel: Codable, Identifiable {
+public struct FBDemoModel: Codable, Identifiable, Hashable {
 	
 	public let id = UUID()
-	let name: String
-	let state: String?
-	let isCapital: Bool?
-	let age: Int64?
+	var name: String
+	var state: String?
+	var isCapital: Bool?
+	var age: Int64?
 	
 	enum CodingKeys: String, CodingKey {
 		case name

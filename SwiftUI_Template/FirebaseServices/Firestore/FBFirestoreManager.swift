@@ -419,5 +419,9 @@ class FBFirestoreManager {
 	
 	
 	
+//	func getAggregateDocuments(from path: , to: ,completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+//	{
+//
+//	}
 }
 

@@ -44,8 +44,6 @@ struct OtherView: View {
 							let path = db.collection("testCollection").document("testDocument")
 							let testDoc = FBDemoModel(
 								name: "Vas",
-								state: nil,
-								isCapital: nil,
 								age: 35
 							)
 							FBFirestoreManager.shared.setWithDocumentId(for: path, document: testDoc, merge: true) {_ in }
@@ -57,8 +55,6 @@ struct OtherView: View {
 							let path = db.collection("testCollection")
 							let testDoc = FBDemoModel(
 								name: "Vas",
-								state: nil,
-								isCapital: nil,
 								age: 35
 							)
 							FBFirestoreManager.shared.addDocument(for: path, document: testDoc) { _ in
