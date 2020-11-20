@@ -118,6 +118,20 @@ struct OtherView: View {
 						.onTapGesture {
 							self.listenAllDocumentsInCollection()
 						}
+					
+					Text("Get documents with Query")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.getDocumentsWithQuery()
+						}
+					
+					Text("Listen for documents with Query")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.listenDocumentsWithQuery()
+						}
 				}
 				
 				
@@ -205,7 +219,7 @@ extension OtherView {
 	
 	func getAllDocsInCollection() {
 		let path = db.collection("testCollection")
-		FBFirestoreManager.shared.getAllDocumentsInCollection(for: path) { result in
+		FBFirestoreManager.shared.getAllDocuments(for: path) { result in
 			switch result {
 				case .success(let collection):
 					FBDemoModel.castDocuments(for: collection) { result in
@@ -225,7 +239,7 @@ extension OtherView {
 	
 	func listenSingleDocument() {
 		let path = db.collection("testCollection").document("testDocument")
-		self.documentListener = FBFirestoreManager.shared.listenForDocument(for: path, completion: { result in
+		self.documentListener = FBFirestoreManager.shared.listenForDocument(for: path) { result in
 			switch result {
 				case .success(let document):
 					FBDemoModel.castDocument(for: document) { result in
@@ -239,13 +253,56 @@ extension OtherView {
 				case .failure(let error):
 					print("Error getting document: \(error.rawValue)")
 			}
-		})
+		}
 	}
 	
 	
 	func listenAllDocumentsInCollection() {
 		let path = db.collection("testCollection")
-		self.documentsListener = FBFirestoreManager.shared.listenAllDocumentsInCollection(for: path) { result in
+		self.documentsListener = FBFirestoreManager.shared.listenForAllDocuments(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+							case .failure(let error):
+								print("Error decoding city: \(error.rawValue)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error.rawValue)")
+			}
+		}
+	}
+	
+	
+	func getDocumentsWithQuery() {
+		let path = db.collection("testCollection").whereField("state", isEqualTo: "Hell")
+		FBFirestoreManager.shared.getDocumentsWithQuery(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+							case .failure(let error):
+								print("Error decoding city: \(error.rawValue)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error.rawValue)")
+			}
+		}
+	}
+	
+	
+	func listenDocumentsWithQuery() {
+		let path = db.collection("testCollection")
+			.whereField("name", isEqualTo: "Vas")
+			.whereField("state", isEqualTo: "Hell")
+		
+		self.documentsListener = FBFirestoreManager.shared.listenForDocumentsWithQuery(for: path) { result in
 			switch result {
 				case .success(let collection):
 					FBDemoModel.castDocuments(for: collection) { result in

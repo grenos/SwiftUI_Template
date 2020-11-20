@@ -241,17 +241,17 @@ class FBFirestoreManager {
 	
 	
 	
-	//MARK: - getAllDocumentsInCollection
+	//MARK: - getAllDocuments
 	/**
 	- returns: QuerySnapshot
 	- throws: Error of type "FBError"
 	- parameters:
 	- path: Firestore CollectionReference
 	
-	Retrieves all documents from firestore collection
+	Retrieves documents from firestore collection
 	*/
-	func getAllDocumentsInCollection(for path: CollectionReference,
-									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+	func getAllDocuments(for path: CollectionReference,
+						 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
 	{
 		path.getDocuments() { (querySnapshot, error) in
 			if let error = error {
@@ -275,7 +275,7 @@ class FBFirestoreManager {
 	Listens to a document in Firestore
 	*/
 	func listenForDocument(for path: DocumentReference,
-							completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void) -> ListenerRegistration?
+						   completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { documentSnapshot, error in
 			guard let document = documentSnapshot else {
@@ -296,17 +296,17 @@ class FBFirestoreManager {
 	
 	
 	
-	//MARK: - listenAllDocumentsInCollection
+	//MARK: - listenForAllDocuments
 	/**
 	- returns: QuerySnapshot
 	- throws: Error of type "FBError"
 	- parameters:
 	- path: Firestore CollectionReference
 	
-	Listens to all documents in Firestore collection
+	Listens to documents in Firestore collection
 	*/
-	func listenAllDocumentsInCollection(for path: CollectionReference,
-						   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+	func listenForAllDocuments(for path: CollectionReference,
+							   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { querySnapshot, error in
 			if let error = error {
@@ -317,6 +317,56 @@ class FBFirestoreManager {
 			}
 		}
 	}
+	
+	
+	
+	//MARK: - getDocumentsWithQuery
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore Query
+	
+	Retrieves documents from firestore collection
+	*/
+	func getDocumentsWithQuery(for path: Query,
+							   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+	{
+		path.getDocuments() { (querySnapshot, error) in
+			if let error = error {
+				print("Error getting documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
+	
+	
+	
+	//MARK: - listenForDocumentsWithQuery
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore Query
+	
+	Listens to documents in Firestore collection
+	*/
+	func listenForDocumentsWithQuery(for path: Query,
+									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+	{
+		path.addSnapshotListener { querySnapshot, error in
+			if let error = error {
+				print("Error listening for documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
+	
+	
 	
 	
 }
