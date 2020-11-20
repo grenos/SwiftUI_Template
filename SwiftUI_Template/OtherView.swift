@@ -14,14 +14,17 @@ struct OtherView: View {
 	
 	@State var isPresented: Bool = false
 	@State var documentListener: ListenerRegistration?
-	@State var documentsListener: ListenerRegistration?
-	
+	@State var allDocumentsListener: ListenerRegistration?
+	@State var queryDocumentsListener: ListenerRegistration?
+	@State var querySubCollectionListener: ListenerRegistration?
 	
 	func viewWillAppear() {}
 	
 	func viewWillDisappear() {
 		self.documentListener?.remove()
-		self.documentsListener?.remove()
+		self.allDocumentsListener?.remove()
+		self.queryDocumentsListener?.remove()
+		self.querySubCollectionListener?.remove()
 	}
 	
 	var body: some View {
@@ -132,6 +135,23 @@ struct OtherView: View {
 						.onTapGesture {
 							self.listenDocumentsWithQuery()
 						}
+					
+					Text("Query docs from subcollections")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.getDocumentsFromSubCollection()
+						}
+					
+					Text("Listen Query from subcollections")
+						.padding(.bottom, 10)
+						.foregroundColor(.red)
+						.onTapGesture {
+							self.listenDocumentsFromSubCollection()
+						}
+					
+					
+					
 				}
 				
 				
@@ -259,7 +279,7 @@ extension OtherView {
 	
 	func listenAllDocumentsInCollection() {
 		let path = db.collection("testCollection")
-		self.documentsListener = FBFirestoreManager.shared.listenForAllDocuments(for: path) { result in
+		self.allDocumentsListener = FBFirestoreManager.shared.listenForAllDocuments(for: path) { result in
 			switch result {
 				case .success(let collection):
 					FBDemoModel.castDocuments(for: collection) { result in
@@ -302,7 +322,46 @@ extension OtherView {
 			.whereField("name", isEqualTo: "Vas")
 			.whereField("state", isEqualTo: "Hell")
 		
-		self.documentsListener = FBFirestoreManager.shared.listenForDocumentsWithQuery(for: path) { result in
+		self.queryDocumentsListener = FBFirestoreManager.shared.listenForDocumentsWithQuery(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+							case .failure(let error):
+								print("Error decoding city: \(error.rawValue)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error.rawValue)")
+			}
+		}
+	}
+	
+	
+	func getDocumentsFromSubCollection() {
+		let path = db.collectionGroup("landmarks").whereField("type", isEqualTo: "museum")
+		FBFirestoreManager.shared.getSubCollectionWithQuery(for: path) { result in
+			switch result {
+				case .success(let collection):
+					FBDemoModel.castDocuments(for: collection) { result in
+						switch result {
+							case .success(let documentArray):
+								print("document: \(documentArray)")
+							case .failure(let error):
+								print("Error decoding city: \(error.rawValue)")
+						}
+					}
+				case .failure(let error):
+					print("Error getting collection: \(error.rawValue)")
+			}
+		}
+	}
+	
+	func listenDocumentsFromSubCollection() {
+		let path = db.collectionGroup("landmarks").whereField("type", isEqualTo: "museum")
+		self.querySubCollectionListener = FBFirestoreManager.shared.listenForSubCollectionWithQuery(for: path) { result in
 			switch result {
 				case .success(let collection):
 					FBDemoModel.castDocuments(for: collection) { result in

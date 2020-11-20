@@ -369,5 +369,55 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - getSubCollectionWithQuery
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore Querry
+	
+	Retrieves documents from all firestore collections that have the same name
+	*/
+	func getSubCollectionWithQuery(for path: Query,
+						 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+	{
+		path.getDocuments() { (querySnapshot, error) in
+			if let error = error {
+				print("Error getting documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	//MARK: - listenForSubCollectionWithQuery
+	/**
+	- returns: QuerySnapshot
+	- throws: Error of type "FBError"
+	- parameters:
+	- path: Firestore Query
+	
+	Listens to documents in all Firestore subcollections that have the same name
+	*/
+	func listenForSubCollectionWithQuery(for path: Query,
+									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+	{
+		path.addSnapshotListener { querySnapshot, error in
+			if let error = error {
+				print("Error listening for documents: \(error.localizedDescription)")
+				completion(.failure(.genericOperationError))
+			} else {
+				completion(.success(querySnapshot!))
+			}
+		}
+	}
+	
+	
+	
 }
 

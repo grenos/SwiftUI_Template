@@ -155,6 +155,7 @@
 			children = (
 				7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */,
 				7DCD4A0825657F5200AC64DE /* FirebaseServices */,
+				7DCD4A602567FBFE00AC64DE /* Models */,
 				7D942FA1256014BB00C6A0DD /* AppDelegate.swift */,
 				7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */,
 				7D942FA5256014BB00C6A0DD /* AppEntry.swift */,
@@ -170,7 +171,6 @@
 				7D942FAC256014BC00C6A0DD /* LaunchScreen.storyboard */,
 				7D942FAF256014BC00C6A0DD /* Info.plist */,
 				7D942FA9256014BC00C6A0DD /* Preview Content */,
-				7DCD4A032565382E00AC64DE /* FBDemoModel.swift */,
 			);
 			path = SwiftUI_Template;
 			sourceTree = "<group>";
@@ -224,6 +224,14 @@
 				7DCD49E525650DD300AC64DE /* FBError.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7DCD4A602567FBFE00AC64DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7DCD4A032565382E00AC64DE /* FBDemoModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E5A004F55D5FC73C6B1EE7A6 /* Frameworks */ = {
