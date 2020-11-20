@@ -13,10 +13,12 @@ struct OtherView: View {
 	@EnvironmentObject var globalState: GlobalState
 	
 	@State var isPresented: Bool = false
+	
 	@State var documentListener: ListenerRegistration?
 	@State var allDocumentsListener: ListenerRegistration?
 	@State var queryDocumentsListener: ListenerRegistration?
 	@State var querySubCollectionListener: ListenerRegistration?
+	@State var lastSnapShotForPagination: QueryDocumentSnapshot?
 	
 	func viewWillAppear() {}
 	
@@ -298,10 +300,18 @@ extension OtherView {
 	
 	
 	func getDocumentsWithQuery() {
-		let path = db.collection("testCollection").whereField("state", isEqualTo: "Hell")
-		FBFirestoreManager.shared.getDocumentsWithQuery(for: path) { result in
+		let query: Query
+		if self.lastSnapShotForPagination == nil {
+			query = db.collection("testCollection").whereField("state", isEqualTo: "Hell").limit(to: 20)
+		} else {
+			query = db.collection("testCollection").whereField("state", isEqualTo: "Hell").limit(to: 20).start(atDocument: self.lastSnapShotForPagination!)
+		}
+		FBFirestoreManager.shared.getDocumentsWithQuery(for: query) { result in
 			switch result {
 				case .success(let collection):
+					
+					self.lastSnapShotForPagination = collection.documents.last
+					
 					FBDemoModel.castDocuments(for: collection) { result in
 						switch result {
 							case .success(let documentArray):
