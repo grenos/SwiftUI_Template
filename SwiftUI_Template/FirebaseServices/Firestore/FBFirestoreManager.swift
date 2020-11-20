@@ -18,6 +18,8 @@ class FBFirestoreManager {
 	
 	
 	
+	
+	//MARK: - setWithDocumentId
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
@@ -49,6 +51,7 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - addDocument
 	/**
 	- returns: String
 	- throws: Error of type "FBError"
@@ -77,6 +80,7 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - updateDocumentField
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
@@ -110,6 +114,7 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - batchOperations
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
@@ -160,7 +165,7 @@ class FBFirestoreManager {
 	
 	
 	
-	
+	//MARK: - deleteDocument
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
@@ -185,6 +190,7 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - deleteDocumentField
 	/**
 	- returns: Void
 	- throws: Error of type "FBError"
@@ -211,7 +217,7 @@ class FBFirestoreManager {
 	
 	
 	
-	
+	//MARK: - getDocument
 	/**
 	- returns: DocumentSnapshot
 	- throws: Error of type "FBError"
@@ -235,7 +241,7 @@ class FBFirestoreManager {
 	
 	
 	
-	
+	//MARK: - getAllDocumentsInCollection
 	/**
 	- returns: QuerySnapshot
 	- throws: Error of type "FBError"
@@ -259,6 +265,7 @@ class FBFirestoreManager {
 	
 	
 	
+	//MARK: - listenForDocument
 	/**
 	- returns: DocumentSnapshot
 	- throws: Error of type "FBError"
