@@ -194,11 +194,11 @@ extension OtherView {
 							case .success(let document):
 								print("document: \(document)")
 							case .failure(let error):
-								print("Error decoding city: \(error)")
+								print("Error decoding city: \(error.rawValue)")
 						}
 					}
 				case .failure(let error):
-					print("Error getting document: \(error)")
+					print("Error getting document: \(error.rawValue)")
 			}
 		}
 	}
@@ -213,11 +213,11 @@ extension OtherView {
 							case .success(let documentArray):
 								print("document: \(documentArray)")
 							case .failure(let error):
-								print("Error decoding city: \(error)")
+								print("Error decoding city: \(error.rawValue)")
 						}
 					}
 				case .failure(let error):
-					print("Error getting collection: \(error)")
+					print("Error getting collection: \(error.rawValue)")
 			}
 		}
 	}
@@ -233,11 +233,11 @@ extension OtherView {
 							case .success(let document):
 								print("document listener: \(document)")
 							case .failure(let error):
-								print("Error decoding city: \(error)")
+								print("Error decoding city: \(error.rawValue)")
 						}
 					}
 				case .failure(let error):
-					print("Error getting document: \(error)")
+					print("Error getting document: \(error.rawValue)")
 			}
 		})
 	}
@@ -253,11 +253,11 @@ extension OtherView {
 							case .success(let documentArray):
 								print("document: \(documentArray)")
 							case .failure(let error):
-								print("Error decoding city: \(error)")
+								print("Error decoding city: \(error.rawValue)")
 						}
 					}
 				case .failure(let error):
-					print("Error getting collection: \(error)")
+					print("Error getting collection: \(error.rawValue)")
 			}
 		}
 	}
