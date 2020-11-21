@@ -60,8 +60,6 @@ class FBStorageManager {
 	
 	
 	func downloadFileToLocal() {
-		
-
 		// Create a reference to the file you want to download
 		let islandRef = storage.reference().child("images/island.jpg")
 		// Create local filesystem URL
@@ -74,18 +72,12 @@ class FBStorageManager {
 				// Local file URL for "images/island.jpg" is returned
 			}
 		}
-
-		
-		
 	}
 	
 	
 	
-	func addToStorage(with image: UIImage, itemId: String ) {
-		
-
-
-		
+	
+	func deleteStorageFile() {
 		//MARK: Delete file from storage
 		// Create a reference to the file to delete
 		let desertRef = storage.reference().child("desert.jpg")
@@ -97,9 +89,11 @@ class FBStorageManager {
 				// File deleted successfully
 			}
 		}
-		
-			
-		
+	}
+	
+	
+	func downloadFileUrl(with image: UIImage, itemId: String ) {
+	
 		let bucket							= storage.reference().child("userAvatars")
 		let itemName						= itemId + "_avatar.jpg"
 		let uploadImageURL 					= bucket.child(itemName)
@@ -127,19 +121,7 @@ class FBStorageManager {
 				}
 				
 			}
-						
-		
-			// MARK: Download file to memory
-			// Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-			uploadImageURL.getData(maxSize: 1 * 1024 * 1024) { data, error in
-				if let error = error {
-					// Uh-oh, an error occurred!
-				} else {
-					// Data for "images/island.jpg" is returned
-					let image = UIImage(data: data!)
-				}
-			}
-	
+
 		}
 
 		
