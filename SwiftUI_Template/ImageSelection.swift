@@ -15,15 +15,27 @@ struct ImageSelection: View {
 	
 	
 	func loadImage() {
-		FBStorageManager.shared.uploadLocalFile(
-			imageLocalPath!, bucketId: UUID().uuidString, fileName: "testImage.jpg",
-			observe: true ) { result in
-			switch result {
-				case .success(let percentage):
-					print(percentage!)
-				case .failure(let error):
+		if imageLocalPath != nil {
+			FBStorageManager.shared.uploadLocalFile(
+				imageLocalPath!, bucketId: "user1", fileName: "testImage.jpg",
+				observe: true ) { result in
+				switch result {
+					case .success(let percentage):
+						print(percentage!)
+					case .failure(let error):
+						print(error.rawValue)
+				}
+			}
+		}
+	}
+	
+	
+	func downloadToLocal() {
+		FBStorageManager.shared.downloadFileToLocal(bucketId: "user1", fileName: "testImage.jpg") { error in
+			if let error = error {
 				print(error.rawValue)
 			}
+			print("Download Complete")
 		}
 	}
 	
@@ -34,8 +46,15 @@ struct ImageSelection: View {
 		VStack {
 			
 			Text("Open image library")
+				.padding(.bottom, 20)
 				.onTapGesture {
-					self.showingImagePicker = true
+					showingImagePicker = true
+				}
+			
+			Text("Download to local Directory")
+				.padding(.bottom, 20)
+				.onTapGesture {
+					downloadToLocal()
 				}
 			
 		}
@@ -43,7 +62,7 @@ struct ImageSelection: View {
 		.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
 			ImagePicker(image: $inputImage, imagePath: $imageLocalPath)
 		}
-		
+	
 
     }
 }

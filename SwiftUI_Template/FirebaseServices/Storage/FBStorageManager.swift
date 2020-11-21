@@ -14,7 +14,7 @@ class FBStorageManager {
 	
 	static let shared = FBStorageManager()
 	
-
+	
 	
 	//MARK: - uploadLocalFile
 	/**
@@ -33,11 +33,11 @@ class FBStorageManager {
 						 completion: @escaping (Result<Double?, FBStorageError>) -> Void)
 	{
 		let bucketReference = storage.reference().child(bucketId)
-		let name = fileName
-		let uploadTask = bucketReference.child(name)
-		let localFile = file
-		let metadata = StorageMetadata()
-
+		let name 			= fileName
+		let uploadTask 		= bucketReference.child(name)
+		let localFile 		= file
+		let metadata 		= StorageMetadata()
+		
 		let observable = uploadTask.putFile(from: localFile, metadata: metadata) { (metadata, error) in
 			if let error = error {
 				print("error uploading file \(error.localizedDescription)")
@@ -57,22 +57,30 @@ class FBStorageManager {
 	
 	
 	
-	
-	
-	func downloadFileToLocal() {
-		// Create a reference to the file you want to download
-		let islandRef = storage.reference().child("images/island.jpg")
-		// Create local filesystem URL
-		let localURL = URL(string: "path/to/image")!
-		// Download to the local filesystem
-		let downloadTask = islandRef.write(toFile: localURL) { url, error in
+	//MARK: - downloadFileToLocal
+	/**
+	- returns: Void
+	- throws: Error of type "FBStorageError"
+	- parameters:
+	- bucketId: bucket name
+	- fileName: file name
+	*/
+	func downloadFileToLocal(bucketId: String,
+							 fileName: String,
+							 completion: @escaping (FBStorageError?) -> Void)
+	{
+		let name 			= fileName
+		let directoryPath 	= getDocumentsDirectory().appendingPathComponent(name)
+		let downloadTask 	= storage.reference().child("\(bucketId)/\(name)")
+		
+		downloadTask.write(toFile: directoryPath) { url, error in
 			if let error = error {
-				// Uh-oh, an error occurred!
-			} else {
-				// Local file URL for "images/island.jpg" is returned
+				print("Error saving to local directory: \(error.localizedDescription)")
+				completion(.genericStorageError)
 			}
 		}
 	}
+	
 	
 	
 	
@@ -85,6 +93,7 @@ class FBStorageManager {
 		desertRef.delete { error in
 			if let error = error {
 				// Uh-oh, an error occurred!
+				print(error.localizedDescription)
 			} else {
 				// File deleted successfully
 			}
@@ -92,8 +101,11 @@ class FBStorageManager {
 	}
 	
 	
-	func downloadFileUrl(with image: UIImage, itemId: String ) {
 	
+	
+	
+	func downloadFileUrl(with image: UIImage, itemId: String ) {
+		
 		let bucket							= storage.reference().child("userAvatars")
 		let itemName						= itemId + "_avatar.jpg"
 		let uploadImageURL 					= bucket.child(itemName)
@@ -121,12 +133,12 @@ class FBStorageManager {
 				}
 				
 			}
-
+			
 		}
-
+		
 		
 	}
-
+	
 	
 	
 	
