@@ -22,7 +22,7 @@ class FBFirestoreManager {
 	//MARK: - setWithDocumentId
 	/**
 	- returns: Void
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	- documnt: A Codable class (usually a model class)
@@ -35,7 +35,7 @@ class FBFirestoreManager {
 	func setWithDocumentId<T: Codable>(for path: DocumentReference,
 									   document: T,
 									   merge: Bool,
-									   completion: @escaping (Result<Void.Type, FBError>) -> Void)
+									   completion: @escaping (Result<Void.Type, FBFirestoreError>) -> Void)
 	{
 		do {
 			try path.setData(from: document, merge: merge) { _ in
@@ -44,7 +44,7 @@ class FBFirestoreManager {
 			}
 		} catch let error {
 			print("Error setting document: \(error.localizedDescription)")
-			completion(.failure(.genericOperationError))
+			completion(.failure(.genericFirestoreError))
 		}
 	}
 	
@@ -54,7 +54,7 @@ class FBFirestoreManager {
 	//MARK: - addDocument
 	/**
 	- returns: String
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore CollectionReference
 	- documnt: A Codable class (usually a model class)
@@ -63,7 +63,7 @@ class FBFirestoreManager {
 	*/
 	func addDocument<T: Codable>(for path: CollectionReference,
 								 document: T,
-								 completion: @escaping (Result<String, FBError>) -> Void)
+								 completion: @escaping (Result<String, FBFirestoreError>) -> Void)
 	{
 		var ref: DocumentReference? = nil
 		do {
@@ -73,7 +73,7 @@ class FBFirestoreManager {
 			})
 		} catch let error {
 			print("Error setting document: \(error.localizedDescription)")
-			completion(.failure(.genericOperationError))
+			completion(.failure(.genericFirestoreError))
 		}
 	}
 	
@@ -83,7 +83,7 @@ class FBFirestoreManager {
 	//MARK: - updateDocumentField
 	/**
 	- returns: Void
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	- documnt: A dictionary with the fields to update
@@ -98,12 +98,12 @@ class FBFirestoreManager {
 	*/
 	func updateDocumentField(for path: DocumentReference,
 							 document: [String : Any],
-							 completion: @escaping (Result<Void.Type, FBError>) -> Void)
+							 completion: @escaping (Result<Void.Type, FBFirestoreError>) -> Void)
 	{
 		path.updateData(document) { error in
 			if let error = error {
 				print("Error updating document: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				print("Succesfully updated document to firestore")
 				completion(.success(Void.self))
@@ -117,7 +117,7 @@ class FBFirestoreManager {
 	//MARK: - batchOperations
 	/**
 	- returns: Void
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- payload: a dictionary that contains arrays of categorized operations based on CRUD
 	which in turn every array contains dictionaries
@@ -126,7 +126,7 @@ class FBFirestoreManager {
 	It can be used with set update or delete.
 	*/
 	func batchOperations(for payload: [String : [[String : Any]] ],
-						 completion: @escaping (Result<Void.Type, FBError>) -> Void)
+						 completion: @escaping (Result<Void.Type, FBFirestoreError>) -> Void)
 	{
 		let batch = db.batch()
 		
@@ -154,7 +154,7 @@ class FBFirestoreManager {
 		batch.commit() { error in
 			if let error = error {
 				print("Error on batch operation: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				print("Succesfully completed batch operation")
 				completion(.success(Void.self))
@@ -168,19 +168,19 @@ class FBFirestoreManager {
 	//MARK: - deleteDocument
 	/**
 	- returns: Void
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	
 	Deletes a document
 	*/
 	func deleteDocument(for path: DocumentReference,
-						completion: @escaping (Result<Void.Type, FBError>) -> Void)
+						completion: @escaping (Result<Void.Type, FBFirestoreError>) -> Void)
 	{
 		path.delete() { error in
 			if let error = error {
 				print("Error deleting document: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				print("Document successfully removed!")
 				completion(.success(Void.self))
@@ -193,7 +193,7 @@ class FBFirestoreManager {
 	//MARK: - deleteDocumentField
 	/**
 	- returns: Void
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	- documentField: Document fiekd to be deleted
@@ -202,12 +202,12 @@ class FBFirestoreManager {
 	*/
 	func deleteDocumentField(for path: DocumentReference,
 							 documentField: [String : Any],
-							 completion: @escaping (Result<Void.Type, FBError>) -> Void)
+							 completion: @escaping (Result<Void.Type, FBFirestoreError>) -> Void)
 	{
 		path.updateData(documentField) { error in
 			if let error = error {
 				print("Error deleting field: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				print("Field successfully removed!")
 				completion(.success(Void.self))
@@ -220,21 +220,21 @@ class FBFirestoreManager {
 	//MARK: - getDocument
 	/**
 	- returns: DocumentSnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	
 	Retrieves a single document from firestore
 	*/
 	func getDocument(for path: DocumentReference,
-					 completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void)
+					 completion: @escaping (Result<DocumentSnapshot, FBFirestoreError>) -> Void)
 	{
 		path.getDocument { (document, error) in
 			if let document = document, document.exists {
 				completion(.success(document))
 			} else {
 				print("Document does not exist: \(String(describing: error?.localizedDescription))")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			}
 		}
 	}
@@ -244,19 +244,19 @@ class FBFirestoreManager {
 	//MARK: - getAllDocuments
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore CollectionReference
 	
 	Retrieves documents from firestore collection
 	*/
 	func getAllDocuments(for path: CollectionReference,
-						 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+						 completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void)
 	{
 		path.getDocuments() { (querySnapshot, error) in
 			if let error = error {
 				print("Error getting documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -268,24 +268,24 @@ class FBFirestoreManager {
 	//MARK: - listenForDocument
 	/**
 	- returns: DocumentSnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore DocumentReference
 	
 	Listens to a document in Firestore
 	*/
 	func listenForDocument(for path: DocumentReference,
-						   completion: @escaping (Result<DocumentSnapshot, FBError>) -> Void) -> ListenerRegistration?
+						   completion: @escaping (Result<DocumentSnapshot, FBFirestoreError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { documentSnapshot, error in
 			guard let document = documentSnapshot else {
 				print("Error fetching document: \(String(describing: error?.localizedDescription))")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 				return
 			}
 			guard document.data() != nil else {
 				print("Document data was empty.")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 				return
 			}
 			completion(.success(document))
@@ -299,19 +299,19 @@ class FBFirestoreManager {
 	//MARK: - listenForAllDocuments
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore CollectionReference
 	
 	Listens to documents in Firestore collection
 	*/
 	func listenForAllDocuments(for path: CollectionReference,
-							   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+							   completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { querySnapshot, error in
 			if let error = error {
 				print("Error listening for documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -323,19 +323,19 @@ class FBFirestoreManager {
 	//MARK: - getDocumentsWithQuery
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore Query
 	
 	Retrieves documents from firestore collection
 	*/
 	func getDocumentsWithQuery(for path: Query,
-							   completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+							   completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void)
 	{
 		path.getDocuments() { (querySnapshot, error) in
 			if let error = error {
 				print("Error getting documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -347,19 +347,19 @@ class FBFirestoreManager {
 	//MARK: - listenForDocumentsWithQuery
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore Query
 	
 	Listens to documents in Firestore collection
 	*/
 	func listenForDocumentsWithQuery(for path: Query,
-									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+									 completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { querySnapshot, error in
 			if let error = error {
 				print("Error listening for documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -372,19 +372,19 @@ class FBFirestoreManager {
 	//MARK: - getSubCollectionWithQuery
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore Querry
 	
 	Retrieves documents from all firestore collections that have the same name
 	*/
 	func getSubCollectionWithQuery(for path: Query,
-						 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+						 completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void)
 	{
 		path.getDocuments() { (querySnapshot, error) in
 			if let error = error {
 				print("Error getting documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -398,19 +398,19 @@ class FBFirestoreManager {
 	//MARK: - listenForSubCollectionWithQuery
 	/**
 	- returns: QuerySnapshot
-	- throws: Error of type "FBError"
+	- throws: Error of type "FBFirestoreError"
 	- parameters:
 	- path: Firestore Query
 	
 	Listens to documents in all Firestore subcollections that have the same name
 	*/
 	func listenForSubCollectionWithQuery(for path: Query,
-									 completion: @escaping (Result<QuerySnapshot, FBError>) -> Void) -> ListenerRegistration?
+									 completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void) -> ListenerRegistration?
 	{
 		path.addSnapshotListener { querySnapshot, error in
 			if let error = error {
 				print("Error listening for documents: \(error.localizedDescription)")
-				completion(.failure(.genericOperationError))
+				completion(.failure(.genericFirestoreError))
 			} else {
 				completion(.success(querySnapshot!))
 			}
@@ -419,7 +419,7 @@ class FBFirestoreManager {
 	
 	
 	
-//	func getAggregateDocuments(from path: , to: ,completion: @escaping (Result<QuerySnapshot, FBError>) -> Void)
+//	func getAggregateDocuments(from path: , to: ,completion: @escaping (Result<QuerySnapshot, FBFirestoreError>) -> Void)
 //	{
 //
 //	}

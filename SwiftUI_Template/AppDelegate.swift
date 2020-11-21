@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 let db = Firestore.firestore()
-
+let storage = Storage.storage()
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

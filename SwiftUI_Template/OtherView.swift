@@ -182,6 +182,10 @@ struct OtherView: View {
 }
 
 
+
+
+
+
 extension OtherView {
 	
 	func batchOperation() {

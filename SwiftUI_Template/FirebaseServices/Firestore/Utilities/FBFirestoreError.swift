@@ -8,6 +8,6 @@
 import Foundation
 
 
-enum FBError: String, Error {
-	case genericOperationError = "Woops! Something went wrong. Please try again"
+enum FBFirestoreError: String, Error {
+	case genericFirestoreError = "Woops! Something went wrong. Please try again"
 }

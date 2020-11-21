@@ -11,6 +11,7 @@ enum TabItem: Hashable {
 	case home
 	case other
 	case star
+	case camera
 }
 
 struct Tabbar: View {
@@ -40,6 +41,13 @@ struct Tabbar: View {
 					Text("Star")
 				}
 				.tag(TabItem.star)
+			
+			ImageSelection()
+				.tabItem {
+					Image(systemName: globalState.selectedTabItem == TabItem.star ? "camera.fill" : "camera")
+					Text("Photo")
+				}
+				.tag(TabItem.camera)
 		}
     }
 }

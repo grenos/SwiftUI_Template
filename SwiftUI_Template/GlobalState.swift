@@ -21,7 +21,7 @@ enum StateSlice: Hashable {
 
 
 final class GlobalState: ObservableObject {
-	
+		
 	// default state
 	@Published var test: String
 	

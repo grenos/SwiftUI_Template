@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		636FCF62FF810BD096CA26F7 /* Pods_SwiftUI_TemplateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A260C2A470DB86A712EA801 /* Pods_SwiftUI_TemplateUITests.framework */; };
 		675D2D9606131F52203CF551 /* Pods_SwiftUI_TemplateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF70D1D1352997289232B5C1 /* Pods_SwiftUI_TemplateTests.framework */; };
+		7D312A97256943360034177B /* FBStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312A96256943360034177B /* FBStorageManager.swift */; };
+		7D312AA3256957F60034177B /* FBStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AA2256957F60034177B /* FBStorageError.swift */; };
+		7D312AA825695E4C0034177B /* ImageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AA725695E4C0034177B /* ImageSelection.swift */; };
 		7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2CE2560347400E622F4 /* UserDefaults.swift */; };
 		7D36A2D42560419200E622F4 /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2D32560419200E622F4 /* OtherView.swift */; };
 		7D942FA2256014BB00C6A0DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FA1256014BB00C6A0DD /* AppDelegate.swift */; };
@@ -23,7 +26,7 @@
 		7D942FDD2560172400C6A0DD /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FDC2560172400C6A0DD /* Tabbar.swift */; };
 		7D942FE2256018E300C6A0DD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FE1256018E300C6A0DD /* HomeView.swift */; };
 		7DCD49E125650A2C00AC64DE /* FBFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */; };
-		7DCD49E625650DD300AC64DE /* FBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E525650DD300AC64DE /* FBError.swift */; };
+		7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E525650DD300AC64DE /* FBFirestoreError.swift */; };
 		7DCD4A042565382E00AC64DE /* FBDemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD4A032565382E00AC64DE /* FBDemoModel.swift */; };
 		7DCD4A5C2567AB3700AC64DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */; };
 		7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17AB4256159C80090CDE8 /* fakeView1.swift */; };
@@ -57,6 +60,9 @@
 		5E6BF36DFFFE34ABA421CD33 /* Pods-SwiftUI_TemplateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUI_TemplateTests.release.xcconfig"; path = "Target Support Files/Pods-SwiftUI_TemplateTests/Pods-SwiftUI_TemplateTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A4DDE63E9A11BB386CE4DF1 /* Pods-SwiftUI_Template.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUI_Template.release.xcconfig"; path = "Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template.release.xcconfig"; sourceTree = "<group>"; };
 		761C5632A215E38FAA659DE1 /* Pods_SwiftUI_Template.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftUI_Template.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D312A96256943360034177B /* FBStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorageManager.swift; sourceTree = "<group>"; };
+		7D312AA2256957F60034177B /* FBStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorageError.swift; sourceTree = "<group>"; };
+		7D312AA725695E4C0034177B /* ImageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelection.swift; sourceTree = "<group>"; };
 		7D36A2CE2560347400E622F4 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7D36A2D32560419200E622F4 /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
 		7D942F9E256014BB00C6A0DD /* SwiftUI_Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +83,7 @@
 		7D942FDC2560172400C6A0DD /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		7D942FE1256018E300C6A0DD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFirestoreManager.swift; sourceTree = "<group>"; };
-		7DCD49E525650DD300AC64DE /* FBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBError.swift; sourceTree = "<group>"; };
+		7DCD49E525650DD300AC64DE /* FBFirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFirestoreError.swift; sourceTree = "<group>"; };
 		7DCD4A032565382E00AC64DE /* FBDemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDemoModel.swift; sourceTree = "<group>"; };
 		7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7DF17AB4256159C80090CDE8 /* fakeView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeView1.swift; sourceTree = "<group>"; };
@@ -128,6 +134,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7D312A95256943230034177B /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7D312AA1256957E00034177B /* Utilities */,
+				7D312A96256943360034177B /* FBStorageManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		7D312AA1256957E00034177B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7D312AA2256957F60034177B /* FBStorageError.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		7D942F95256014BB00C6A0DD = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +183,7 @@
 				7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */,
 				7D942FA5256014BB00C6A0DD /* AppEntry.swift */,
 				7D942FDC2560172400C6A0DD /* Tabbar.swift */,
+				7D312AA725695E4C0034177B /* ImageSelection.swift */,
 				7D942FE1256018E300C6A0DD /* HomeView.swift */,
 				7DF17AE1256198120090CDE8 /* MultiView.swift */,
 				7DF17AB4256159C80090CDE8 /* fakeView1.swift */,
@@ -204,7 +228,7 @@
 		7DCD4A0825657F5200AC64DE /* FirebaseServices */ = {
 			isa = PBXGroup;
 			children = (
-				7DCD4A0A25657F6F00AC64DE /* Utilities */,
+				7D312A95256943230034177B /* Storage */,
 				7DCD4A0925657F6500AC64DE /* Firestore */,
 			);
 			path = FirebaseServices;
@@ -213,6 +237,7 @@
 		7DCD4A0925657F6500AC64DE /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
+				7DCD4A0A25657F6F00AC64DE /* Utilities */,
 				7DCD49E025650A2C00AC64DE /* FBFirestoreManager.swift */,
 			);
 			path = Firestore;
@@ -221,7 +246,7 @@
 		7DCD4A0A25657F6F00AC64DE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7DCD49E525650DD300AC64DE /* FBError.swift */,
+				7DCD49E525650DD300AC64DE /* FBFirestoreError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -471,13 +496,16 @@
 				7D942FDD2560172400C6A0DD /* Tabbar.swift in Sources */,
 				7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */,
 				7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */,
-				7DCD49E625650DD300AC64DE /* FBError.swift in Sources */,
+				7D312AA3256957F60034177B /* FBStorageError.swift in Sources */,
+				7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */,
 				7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */,
 				7DF17ADD256196510090CDE8 /* FakeModal.swift in Sources */,
 				7D942FE2256018E300C6A0DD /* HomeView.swift in Sources */,
 				7DCD49E125650A2C00AC64DE /* FBFirestoreManager.swift in Sources */,
+				7D312AA825695E4C0034177B /* ImageSelection.swift in Sources */,
 				7D942FD52560155600C6A0DD /* GlobalState.swift in Sources */,
 				7DCD4A042565382E00AC64DE /* FBDemoModel.swift in Sources */,
+				7D312A97256943360034177B /* FBStorageManager.swift in Sources */,
 				7D942FA6256014BB00C6A0DD /* AppEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
