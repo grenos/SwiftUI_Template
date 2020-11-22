@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ImageSelection: View {
 	
-	@State private var showingImagePicker = false
+	@State private var showingImagePicker: Bool = false
+	@State private var isUploadWithUrl: Bool = false
 	@State private var inputImage: UIImage?
 	@State private var imageLocalPath: URL?
 	
@@ -54,6 +55,22 @@ struct ImageSelection: View {
 	}
 	
 	
+	func uploadWithUrl() {
+		if imageLocalPath != nil {
+			FBStorageManager.shared.uploadLocalFileWithUrl(
+				imageLocalPath!, bucketId: "user1", fileName: "testImage.jpg",
+				withUrl: true ) { result in
+				switch result {
+					case .success(let urlReference):
+						print(urlReference!)
+					case .failure(let error):
+						print(error.rawValue)
+				}
+			}
+		}
+	}
+	
+	
 	var body: some View {
 		
 		VStack {
@@ -61,6 +78,7 @@ struct ImageSelection: View {
 			Text("Open image library and save to file to Storage")
 				.padding(.bottom, 20)
 				.onTapGesture {
+					isUploadWithUrl = false
 					showingImagePicker = true
 				}
 			
@@ -76,9 +94,16 @@ struct ImageSelection: View {
 					deleteFromStorage()
 				}
 			
+			Text("Upload with URL")
+				.padding(.bottom, 20)
+				.onTapGesture {
+					isUploadWithUrl = true
+					showingImagePicker = true
+				}
+			
 		}
 		.navigationBarTitle("Image Picker")
-		.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+		.sheet(isPresented: $showingImagePicker, onDismiss: isUploadWithUrl ? uploadWithUrl : loadImage) {
 			ImagePicker(image: $inputImage, imagePath: $imageLocalPath)
 		}
 		

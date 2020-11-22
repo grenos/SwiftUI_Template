@@ -117,42 +117,48 @@ class FBStorageManager {
 	
 	
 	
-	
-	
-	func downloadFileUrl(with image: UIImage, itemId: String ) {
+	//MARK: - uploadLocalFileWithUrl
+	/**
+	- returns: Double?
+	- throws: Error of type "FBStorageError"
+	- parameters:
+	- file: url of file to upload
+	- bucketId: bucket name
+	- fileName: file name
+	- withUrl: flag to return url ref of file in Storage
+	*/
+	func uploadLocalFileWithUrl(_ file: URL,
+								bucketId: String,
+								fileName: String,
+								withUrl: Bool,
+								completion: @escaping (Result<URL?, FBStorageError>) -> Void)
+	{
+		let bucketReference = storage.reference().child(bucketId)
+		let name 			= fileName
+		let uploadTask 		= bucketReference.child(name)
+		let localFile 		= file
+		let metadata 		= StorageMetadata()
 		
-		let bucket							= storage.reference().child("userAvatars")
-		let itemName						= itemId + "_avatar.jpg"
-		let uploadImageURL 					= bucket.child(itemName)
-		let metadata 						= StorageMetadata()
-		metadata.contentType 				= "image/jpeg"
-		guard let convertedAvatarForUpload 	= image.jpegData(compressionQuality: 0.8) else {
-			print("Error converting iamge")
-			return
-		}
-		
-		
-		uploadImageURL.putData(convertedAvatarForUpload, metadata: metadata) { (metadata, error) in
-			guard let _ = metadata else {
-				print("ERROR UPLOADING IMAGE")
+		uploadTask.putFile(from: localFile, metadata: metadata) { (metadata, error) in
+			if let error = error {
+				print("error uploading file \(error.localizedDescription)")
+				completion(.failure(.genericStorageError))
 				return
 			}
 			
-			
-			//MARK: download URL
-			// get url reference of the image
-			uploadImageURL.downloadURL { (url, error) in
-				guard let downloadURL = url else {
-					print("ERROR GETTING IMAGE URL")
-					return
+			if withUrl {
+				uploadTask.downloadURL { (url, error) in
+					guard let downloadURL = url else {
+						print("Error getting Url reference")
+						completion(.failure(.genericStorageError))
+						return
+					}
+					completion(.success(downloadURL))
 				}
-				
 			}
-			
 		}
-		
-		
 	}
+	
 	
 	
 	
