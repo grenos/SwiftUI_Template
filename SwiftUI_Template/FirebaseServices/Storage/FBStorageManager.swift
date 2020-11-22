@@ -67,7 +67,7 @@ class FBStorageManager {
 	*/
 	func downloadFileToLocal(bucketId: String,
 							 fileName: String,
-							 completion: @escaping (FBStorageError?) -> Void)
+							 completion: @escaping (Result<Void.Type, FBStorageError>) -> Void)
 	{
 		let name 			= fileName
 		let directoryPath 	= getDocumentsDirectory().appendingPathComponent(name)
@@ -76,7 +76,10 @@ class FBStorageManager {
 		downloadTask.write(toFile: directoryPath) { url, error in
 			if let error = error {
 				print("Error saving to local directory: \(error.localizedDescription)")
-				completion(.genericStorageError)
+				completion(.failure(.genericStorageError))
+			}
+			else {
+				completion(.success(Void.self))
 			}
 		}
 	}
@@ -84,21 +87,33 @@ class FBStorageManager {
 	
 	
 	
-	
-	func deleteStorageFile() {
-		//MARK: Delete file from storage
-		// Create a reference to the file to delete
-		let desertRef = storage.reference().child("desert.jpg")
-		// Delete the file
-		desertRef.delete { error in
+	//MARK: - deleteStorageFile
+	/**
+	- returns: Void
+	- throws: Error of type "FBStorageError"
+	- parameters:
+	- bucketId: bucket name
+	- fileName: file name
+	*/
+	func deleteStorageFile(bucketId: String,
+						   fileName: String,
+						   completion: @escaping (Result<Void.Type, FBStorageError>) -> Void)
+	{
+		let name 		= fileName
+		let deleteTask 	= storage.reference().child("\(bucketId)/\(name)")
+		
+		deleteTask.delete { error in
 			if let error = error {
-				// Uh-oh, an error occurred!
-				print(error.localizedDescription)
-			} else {
-				// File deleted successfully
+				print("Error deleting file from Storage: \(error.localizedDescription)")
+				completion(.failure(.genericStorageError))
+			}
+			else {
+				completion(.success(Void.self))
 			}
 		}
 	}
+	
+	
 	
 	
 	

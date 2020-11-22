@@ -31,21 +31,34 @@ struct ImageSelection: View {
 	
 	
 	func downloadToLocal() {
-		FBStorageManager.shared.downloadFileToLocal(bucketId: "user1", fileName: "testImage.jpg") { error in
-			if let error = error {
-				print(error.rawValue)
+		FBStorageManager.shared.downloadFileToLocal(bucketId: "user1", fileName: "testImage.jpg") { result in
+			switch result {
+				case .success(_):
+					print("Download Complete")
+				case .failure(let error):
+					print(error.rawValue)
 			}
-			print("Download Complete")
 		}
 	}
 	
 	
+	func deleteFromStorage() {
+		FBStorageManager.shared.deleteStorageFile(bucketId: "user1", fileName: "testImage.jpg") { result in
+			switch result {
+				case .success(_):
+					print("File deleted succesfully")
+				case .failure(let error):
+					print(error.rawValue)
+			}
+		}
+	}
 	
-    var body: some View {
+	
+	var body: some View {
 		
 		VStack {
 			
-			Text("Open image library")
+			Text("Open image library and save to file to Storage")
 				.padding(.bottom, 20)
 				.onTapGesture {
 					showingImagePicker = true
@@ -57,21 +70,27 @@ struct ImageSelection: View {
 					downloadToLocal()
 				}
 			
+			Text("Delete file from Storage")
+				.padding(.bottom, 20)
+				.onTapGesture {
+					deleteFromStorage()
+				}
+			
 		}
 		.navigationBarTitle("Image Picker")
 		.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
 			ImagePicker(image: $inputImage, imagePath: $imageLocalPath)
 		}
-	
-
-    }
+		
+		
+	}
 }
 
 
 struct ImageSelection_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageSelection()
-    }
+	static var previews: some View {
+		ImageSelection()
+	}
 }
 
 
