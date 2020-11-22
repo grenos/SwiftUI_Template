@@ -7,21 +7,47 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 let db = Firestore.firestore()
 let storage = Storage.storage()
+let firebaseAuth = Auth.auth()
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+	
+	
+	// MARK: Google SignIn
+	@available(iOS 9.0, *)
+	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+	-> Bool {
+		return GIDSignIn.sharedInstance().handle(url)
+	}
 
-
+	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+		if let error = error {
+			print(error.localizedDescription)
+			return
+		}
+	}
+	
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+		if let error = error {
+			print(error.localizedDescription)
+			return
+		}
+	}
+	
+	
+	
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		FirebaseApp.configure()
 	
+		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+		GIDSignIn.sharedInstance().delegate = self
 		
-		// Override point for customization after application launch.
 		return true
 	}
 

@@ -44,6 +44,10 @@ struct HomeView: View {
 					})
 				
 				
+				Text("SIGN OUT")
+					.onTapGesture {
+						globalState.signOut()
+					}
 				
 				
 				// push programatically either from VM or from this view (uncomment on lifecycles)

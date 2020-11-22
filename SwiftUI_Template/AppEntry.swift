@@ -10,10 +10,27 @@ import SwiftUI
 struct AppEntry: View {
 	
 	@EnvironmentObject var globalState: GlobalState
-		
+	
+	func getUser () {
+		globalState.listen()
+	}
+	
     var body: some View {
-		Tabbar()
+		Group {
+			if (globalState.session != nil) {
+				Tabbar()
+					.transition(.move(edge: .trailing))
+					.animation(.spring())
+			}
+			else {
+				AuthView()
+					.transition(.move(edge: .trailing))
+					.animation(.spring())
+			}
+		}
+		.onAppear(){ getUser() }
     }
+	
 }
 
 struct AppEntry_Previews: PreviewProvider {

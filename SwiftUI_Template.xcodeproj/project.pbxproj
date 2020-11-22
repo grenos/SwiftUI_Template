@@ -13,6 +13,7 @@
 		7D312AA3256957F60034177B /* FBStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AA2256957F60034177B /* FBStorageError.swift */; };
 		7D312AA825695E4C0034177B /* ImageSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AA725695E4C0034177B /* ImageSelection.swift */; };
 		7D312AAE25696DB80034177B /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AAD25696DB80034177B /* FileManager.swift */; };
+		7D312ADF256AB2A20034177B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312ADE256AB2A20034177B /* AuthView.swift */; };
 		7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2CE2560347400E622F4 /* UserDefaults.swift */; };
 		7D36A2D42560419200E622F4 /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2D32560419200E622F4 /* OtherView.swift */; };
 		7D942FA2256014BB00C6A0DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FA1256014BB00C6A0DD /* AppDelegate.swift */; };
@@ -65,6 +66,7 @@
 		7D312AA2256957F60034177B /* FBStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorageError.swift; sourceTree = "<group>"; };
 		7D312AA725695E4C0034177B /* ImageSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelection.swift; sourceTree = "<group>"; };
 		7D312AAD25696DB80034177B /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		7D312ADE256AB2A20034177B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		7D36A2CE2560347400E622F4 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7D36A2D32560419200E622F4 /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
 		7D942F9E256014BB00C6A0DD /* SwiftUI_Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 				7D942FA1256014BB00C6A0DD /* AppDelegate.swift */,
 				7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */,
 				7D942FA5256014BB00C6A0DD /* AppEntry.swift */,
+				7D312ADE256AB2A20034177B /* AuthView.swift */,
 				7D942FDC2560172400C6A0DD /* Tabbar.swift */,
 				7D312AA725695E4C0034177B /* ImageSelection.swift */,
 				7D942FE1256018E300C6A0DD /* HomeView.swift */,
@@ -525,6 +528,7 @@
 				7D942FDD2560172400C6A0DD /* Tabbar.swift in Sources */,
 				7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */,
 				7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */,
+				7D312ADF256AB2A20034177B /* AuthView.swift in Sources */,
 				7D312AA3256957F60034177B /* FBStorageError.swift in Sources */,
 				7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */,
 				7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */,
