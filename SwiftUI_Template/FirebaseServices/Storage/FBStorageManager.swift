@@ -158,40 +158,4 @@ class FBStorageManager {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	func listAllPaginated(pageToken: String? = nil) {
-		let storage = Storage.storage()
-		let storageReference = storage.reference().child("files/uid")
-		
-		let pageHandler: (StorageListResult, Error?) -> Void = { (result, error) in
-			if let error = error {
-				// ...
-			}
-			let prefixes = result.prefixes
-			let items = result.items
-			
-			// ...
-			
-			// Process next page
-			if let token = result.pageToken {
-				self.listAllPaginated(pageToken: token)
-			}
-		}
-		
-		if let pageToken = pageToken {
-			storageReference.list(withMaxResults: 100, pageToken: pageToken, completion: pageHandler)
-		} else {
-			storageReference.list(withMaxResults: 100, completion: pageHandler)
-		}
-	}
-	
-	
-	
-	
 }

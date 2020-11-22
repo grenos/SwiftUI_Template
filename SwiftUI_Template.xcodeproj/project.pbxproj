@@ -292,6 +292,7 @@
 				7D942F9B256014BB00C6A0DD /* Frameworks */,
 				7D942F9C256014BB00C6A0DD /* Resources */,
 				C01B16C2D355AE067F9EE534 /* [CP] Embed Pods Frameworks */,
+				DE75AF71197FE7D8CA13F0B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -470,6 +471,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE75AF71197FE7D8CA13F0B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F704865A6A956DE2B0FA949B /* [CP] Check Pods Manifest.lock */ = {
