@@ -10,7 +10,7 @@ import Introspect
 
 struct fakeView1: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
 		
 	func willAppear() {
 	}

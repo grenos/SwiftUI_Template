@@ -10,19 +10,20 @@ import Introspect
 
 struct HomeView: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
+	@AppStorage("isUserLogged") var isUserLogged: Bool?
 		
 	init(){}
 	
 	func willAppear() {
 		// push programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//			globalState.setValue(slice: StateSlice.pushedProgrmatically, value: true)
+//			sessionObject.setValue(slice: StateSlice.pushedProgrmatically, value: true)
 //		}
 		
 		// pop programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-//			globalState.setValue(slice: StateSlice.pushedProgrmatically, value: false)
+//			sessionObject.setValue(slice: StateSlice.pushedProgrmatically, value: false)
 //		}
 	}
 	
@@ -32,31 +33,36 @@ struct HomeView: View {
 	var body: some View {
 		NavigationView {
 			VStack {
-				Text(globalState.test)
+				Text(sessionObject.test)
 					.padding()
 					.onTapGesture(perform: {
-						globalState.setValue(slice: StateSlice.test, value: "Updated Value, Saved on state and persisted", persist: true)
+						sessionObject.setValue(slice: StateSlice.test, value: "Updated Value, Saved on state and persisted", persist: true)
 					})
 				
 				Text("Navigate to tab")
 					.onTapGesture(perform: {
-						globalState.setValue(slice: StateSlice.activeTab, value: TabItem.other)
+						sessionObject.setValue(slice: StateSlice.activeTab, value: TabItem.other)
 					})
 				
 				
 				Text("SIGN OUT")
+					.padding(.bottom, 20)
 					.onTapGesture {
-						globalState.signOut()
+						sessionObject.signOut { error in
+							if let error = error {
+								print("Error signin you out: \(error)")
+							}
+						}
 					}
 				
 				
 				// push programatically either from VM or from this view (uncomment on lifecycles)
-				NavigationLink("I can also be pushed programatically from my VM", destination: Text("Pushed programatically"), isActive: $globalState.pushedProgrmatically)
+				NavigationLink("I can also be pushed programatically from my VM", destination: Text("Pushed programatically"), isActive: $sessionObject.pushedProgrmatically)
 				
 				// for multiple navigation links
-				NavigationLink(destination: fakeView1(), tag: Coordinator.scrrenOne, selection: $globalState.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
+				NavigationLink(destination: fakeView1(), tag: Coordinator.scrrenOne, selection: $sessionObject.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
 				
-				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large), tag: Coordinator.scrrenTwo, selection: $globalState.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large), tag: Coordinator.scrrenTwo, selection: $sessionObject.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
 					.isDetailLink(false)
 				
 			}
@@ -69,7 +75,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
 	static var previews: some View {
-		HomeView().environmentObject(GlobalState())
+		HomeView().environmentObject(SessionObject())
 		
 	}
 }

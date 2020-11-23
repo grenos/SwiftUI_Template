@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FakeModal: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
 	
 	@Binding var isPresented: Bool
 	

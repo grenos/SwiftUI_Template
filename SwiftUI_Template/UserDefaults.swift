@@ -41,8 +41,11 @@ struct UserDefault<T: Codable> {
 
 
 struct Persistence {
-    @UserDefault("test", defaultValue: "")
-    static var test: String
+    @UserDefault("isLoggedin", defaultValue: false)
+    static var isLoggedin: Bool
+	
+	@UserDefault("test", defaultValue: "")
+	static var test: String
     
 	@UserDefault("followers", defaultValue: [String : String]())
 	static var followers: [String : String]

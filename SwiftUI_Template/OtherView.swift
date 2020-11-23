@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 struct OtherView: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
 	
 	@State var isPresented: Bool = false
 	@State var isEndReached: Bool = false
@@ -398,6 +398,6 @@ extension OtherView {
 
 struct OtherView_Previews: PreviewProvider {
 	static var previews: some View {
-		OtherView().environmentObject(GlobalState())
+		OtherView().environmentObject(SessionObject())
 	}
 }

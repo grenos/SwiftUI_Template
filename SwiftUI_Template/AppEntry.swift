@@ -9,32 +9,32 @@ import SwiftUI
 
 struct AppEntry: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
 	
 	func getUser () {
-		globalState.listen()
+		sessionObject.listen()
 	}
 	
-    var body: some View {
+	var body: some View {
 		Group {
-			if (globalState.session != nil) {
+			if (Persistence.isLoggedin) {
 				Tabbar()
-					.transition(.move(edge: .trailing))
+					.transition(.slide)
 					.animation(.spring())
 			}
 			else {
 				AuthView()
-					.transition(.move(edge: .trailing))
+					.transition(.slide)
 					.animation(.spring())
 			}
 		}
 		.onAppear(){ getUser() }
-    }
+	}
 	
 }
 
 struct AppEntry_Previews: PreviewProvider {
-    static var previews: some View {
-		AppEntry().environmentObject(GlobalState())
-    }
+	static var previews: some View {
+		AppEntry().environmentObject(SessionObject())
+	}
 }

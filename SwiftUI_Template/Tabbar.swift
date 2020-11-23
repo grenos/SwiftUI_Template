@@ -16,35 +16,35 @@ enum TabItem: Hashable {
 
 struct Tabbar: View {
 	
-	@EnvironmentObject var globalState: GlobalState
+	@EnvironmentObject var sessionObject: SessionObject
 		
     var body: some View {
 	
-		TabView(selection: $globalState.selectedTabItem) {
+		TabView(selection: $sessionObject.selectedTabItem) {
 			HomeView()
 				.tabItem {
-					Image(systemName: globalState.selectedTabItem == TabItem.home ? "house.fill" : "house")
+					Image(systemName: sessionObject.selectedTabItem == TabItem.home ? "house.fill" : "house")
 					Text("Home")
 				}
 				.tag(TabItem.home)
 				
 			OtherView()
 				.tabItem {
-					Image(systemName: globalState.selectedTabItem == TabItem.other ? "folder.fill" : "folder")
+					Image(systemName: sessionObject.selectedTabItem == TabItem.other ? "folder.fill" : "folder")
 					Text("Other")
 				}
 				.tag(TabItem.other)
 			
 			MultiView()
 				.tabItem {
-					Image(systemName: globalState.selectedTabItem == TabItem.star ? "star.fill" : "star")
+					Image(systemName: sessionObject.selectedTabItem == TabItem.star ? "star.fill" : "star")
 					Text("Star")
 				}
 				.tag(TabItem.star)
 			
 			ImageSelection()
 				.tabItem {
-					Image(systemName: globalState.selectedTabItem == TabItem.star ? "camera.fill" : "camera")
+					Image(systemName: sessionObject.selectedTabItem == TabItem.star ? "camera.fill" : "camera")
 					Text("Photo")
 				}
 				.tag(TabItem.camera)
@@ -56,7 +56,7 @@ struct Tabbar: View {
 
 struct Tabbar_Previews: PreviewProvider {
 	static var previews: some View {
-		Tabbar().environmentObject(GlobalState())
+		Tabbar().environmentObject(SessionObject())
 	}
 }
 

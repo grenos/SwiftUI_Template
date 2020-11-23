@@ -24,7 +24,7 @@ struct MultiView: View {
 						.fontWeight(.bold)
 						.padding(.vertical,10)
 						.padding(.horizontal,35)
-						.background(Color("Color").opacity(self.index == 0 ? 1 : 0))
+						.background(Color(.cyan).opacity(self.index == 0 ? 1 : 0))
 						.clipShape(Capsule())
 						.onTapGesture {
 							
@@ -41,7 +41,7 @@ struct MultiView: View {
 						.fontWeight(.bold)
 						.padding(.vertical,10)
 						.padding(.horizontal,35)
-						.background(Color("Color").opacity(index == 1 ? 1 : 0))
+						.background(Color(.cyan).opacity(index == 1 ? 1 : 0))
 						.clipShape(Capsule())
 						.onTapGesture {
 							
@@ -58,7 +58,7 @@ struct MultiView: View {
 						.fontWeight(.bold)
 						.padding(.vertical,10)
 						.padding(.horizontal,35)
-						.background(Color("Color").opacity(index == 2 ? 1 : 0))
+						.background(Color(.cyan).opacity(index == 2 ? 1 : 0))
 						.clipShape(Capsule())
 						.onTapGesture {
 							
