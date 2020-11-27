@@ -44,7 +44,7 @@ struct Tabbar: View {
 			
 			ImageSelection()
 				.tabItem {
-					Image(systemName: sessionObject.selectedTabItem == TabItem.star ? "camera.fill" : "camera")
+					Image(systemName: sessionObject.selectedTabItem == TabItem.camera ? "camera.fill" : "camera")
 					Text("Photo")
 				}
 				.tag(TabItem.camera)

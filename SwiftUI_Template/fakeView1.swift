@@ -12,10 +12,16 @@ struct fakeView1: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
 		
-	func willAppear() {
+	func didAppear() {
+		print("Appear")
+	}
+	
+	func didDisappear() {
+		print("Disppear")
 	}
 	
 	func willDisappear() {
+		print("Will Disppear")
 	}
 	
     var body: some View {
@@ -29,10 +35,10 @@ struct fakeView1: View {
 
 				
 			}
-			.onAppear { willAppear() }
-			.onDisappear { willDisappear() }
-
 		}
+		.onAppear { didAppear() }
+		.onDisappear { didDisappear() }
+		.onWillDisappear { willDisappear() }
 		.navigationBarTitle("Detail", displayMode: .inline)
 	
 	}

@@ -17,15 +17,17 @@ struct AppEntry: View {
 	
 	var body: some View {
 		Group {
-			if (Persistence.isLoggedin) {
+			if (sessionObject.user != nil) {
 				Tabbar()
-					.transition(.slide)
-					.animation(.spring())
+//					.transition(.slide)
+//					.animation(.spring())
 			}
 			else {
 				AuthView()
-					.transition(.slide)
-					.animation(.spring())
+					.frame(width: 300, height: 600)
+					.background(Color.green)
+//					.transition(.slide)
+//					.animation(.spring())
 			}
 		}
 		.onAppear(){ getUser() }

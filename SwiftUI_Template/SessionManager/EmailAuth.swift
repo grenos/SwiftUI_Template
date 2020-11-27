@@ -21,7 +21,7 @@ extension SessionObject {
 				completion(.failure(.genericAuthError))
 			}
 			else {
-				self.signIn(email: email, password: password) { _ in }
+				completion(.success(Void.self))
 			}
 		}
 	}
@@ -37,7 +37,6 @@ extension SessionObject {
 				completion(.failure(.genericAuthError))
 			}
 			else {
-				Persistence.isLoggedin = true
 				completion(.success(Void.self))
 			}
 		}
@@ -48,9 +47,7 @@ extension SessionObject {
 		do {
 			try firebaseAuth.signOut()
 			self.user = nil
-			Persistence.isLoggedin = false
 		} catch let error {
-			Persistence.isLoggedin = true
 			completion(error)
 		}
 	}
