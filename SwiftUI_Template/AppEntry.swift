@@ -10,6 +10,7 @@ import SwiftUI
 struct AppEntry: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
+	private let manager = DependencyManager()
 	
 	func getUser () {
 		sessionObject.listen()

@@ -8,9 +8,19 @@
 import SwiftUI
 import Introspect
 
+
+class MyDependency: Injectable {
+	func doSomething() {
+		print("Next level injection 💉")
+	}
+}
+
+
 struct fakeView1: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
+	
+	@Inject var dependency: MyDependency
 			
 	func didAppear() {
 		print("Appear")
@@ -27,6 +37,7 @@ struct fakeView1: View {
     var body: some View {
 		NavigationView {
 			VStack {
+				Button("Tap Me", action: dependency.doSomething)
 				Spacer()
 				Text("FAKE VIEW RED")
 					.padding(.bottom, 40)
