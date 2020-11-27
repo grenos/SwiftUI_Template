@@ -11,7 +11,7 @@ import Introspect
 struct fakeView1: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
-		
+			
 	func didAppear() {
 		print("Appear")
 	}
@@ -30,17 +30,28 @@ struct fakeView1: View {
 				Spacer()
 				Text("FAKE VIEW RED")
 					.padding(.bottom, 40)
-				
-				
-
-				
 			}
 		}
 		.onAppear { didAppear() }
 		.onDisappear { didDisappear() }
 		.onWillDisappear { willDisappear() }
 		.navigationBarTitle("Detail", displayMode: .inline)
-	
+		.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+			print("App entering in background")
+		}
+		.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+			print("App entering in foreground")
+		}
+		.onReceive(NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification)) { _ in
+			print("User Took a screenshot")
+		}
+		.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)) { _ in
+			print("Keyboard is visible")
+		}
+		.onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+			print("Keyboard is not visible")
+		}
+		
 	}
 }
 
