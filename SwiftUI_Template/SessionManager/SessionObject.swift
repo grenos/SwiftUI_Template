@@ -37,9 +37,9 @@ class SessionObject: NSObject, ObservableObject, GIDSignInDelegate {
 	@Published var authListener: AuthStateDidChangeListenerHandle? = nil
 	@Published var isNewUser: Bool = true
 	
+	
 	override init() {
 		super.init()
-		
 		GIDSignIn.sharedInstance().delegate = self
 	}
 	
