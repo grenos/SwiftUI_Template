@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseAuth
 import Firebase
 import GoogleSignIn
+import CryptoKit
+import AuthenticationServices
 
 
 enum Coordinator: Hashable {
@@ -24,9 +26,16 @@ enum StateSlice: Hashable {
 }
 
 
-class SessionObject: NSObject, ObservableObject, GIDSignInDelegate {
+class SessionObject: NSObject,
+					 ObservableObject,
+					 GIDSignInDelegate,
+					 ASAuthorizationControllerPresentationContextProviding,
+					 ASAuthorizationControllerDelegate {
 	
 	var onGoogleSigninCompletion: ((Result<Void.Type, FBAuthError>) -> Void)?
+	var onAppleSigninCompletion: ((Result<Void.Type, FBAuthError>) -> Void)?
+	// Unhashed nonce for apple signin
+	var currentNonce: String?
 	
 	@Published var test: String = "default value"
 	// tab navigation
@@ -81,4 +90,3 @@ class SessionObject: NSObject, ObservableObject, GIDSignInDelegate {
 		}
 	}
 }
-

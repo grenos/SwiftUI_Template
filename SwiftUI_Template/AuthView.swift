@@ -132,7 +132,9 @@ struct AuthView: View {
 				.frame(width: 280, height: 55)
 				.padding()
 				.onTapGesture {
-					
+					sessionObject.startSignInWithAppleFlow { _ in
+						print("SIGN IN WITH APPLE")
+					}
 				}
 		}
 	}

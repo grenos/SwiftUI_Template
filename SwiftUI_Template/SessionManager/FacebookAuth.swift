@@ -25,7 +25,8 @@ extension SessionObject {
 			let accessToken = AccessToken.current!.tokenString
 			let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
 			
-			firebaseAuth.signIn(with: credential) { (authResult, error) in
+			firebaseAuth.signIn(with: credential) { [weak self] (authResult, error) in
+				guard let self = self else { return }
 				guard let user = authResult?.user, error == nil else {
 					print("Error signing in with facebook: \(error!.localizedDescription)")
 					completion(.failure(.genericAuthError))

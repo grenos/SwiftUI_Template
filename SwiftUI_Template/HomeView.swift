@@ -44,7 +44,6 @@ struct HomeView: View {
 						sessionObject.setValue(slice: StateSlice.activeTab, value: TabItem.other)
 					})
 				
-				
 				Text("SIGN OUT")
 					.padding(.bottom, 20)
 					.onTapGesture {
