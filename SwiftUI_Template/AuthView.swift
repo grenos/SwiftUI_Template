@@ -126,6 +126,14 @@ struct AuthView: View {
 				Text("Login With Facebook")
 			}
 			.padding()
+			
+			
+			LoginWithAppleButton()
+				.frame(width: 280, height: 55)
+				.padding()
+				.onTapGesture {
+					
+				}
 		}
 	}
 }

@@ -25,8 +25,6 @@ struct AppEntry: View {
 			}
 			else {
 				AuthView()
-					.frame(width: 300, height: 600)
-					.background(Color.green)
 //					.transition(.slide)
 //					.animation(.spring())
 			}
