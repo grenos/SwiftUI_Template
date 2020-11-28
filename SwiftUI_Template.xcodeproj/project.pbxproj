@@ -22,6 +22,8 @@
 		7D36A2D42560419200E622F4 /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2D32560419200E622F4 /* OtherView.swift */; };
 		7D54533C2571700E004468CD /* ViewLifecycles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54533B2571700E004468CD /* ViewLifecycles.swift */; };
 		7D54534225717D78004468CD /* DependencyInjections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534125717D78004468CD /* DependencyInjections.swift */; };
+		7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534925726D84004468CD /* GoogleAuth.swift */; };
+		7D54537025728772004468CD /* FacebookAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54536F25728772004468CD /* FacebookAuth.swift */; };
 		7D942FA2256014BB00C6A0DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FA1256014BB00C6A0DD /* AppDelegate.swift */; };
 		7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */; };
 		7D942FA6256014BB00C6A0DD /* AppEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942FA5256014BB00C6A0DD /* AppEntry.swift */; };
@@ -80,6 +82,8 @@
 		7D36A2D32560419200E622F4 /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
 		7D54533B2571700E004468CD /* ViewLifecycles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLifecycles.swift; sourceTree = "<group>"; };
 		7D54534125717D78004468CD /* DependencyInjections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjections.swift; sourceTree = "<group>"; };
+		7D54534925726D84004468CD /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
+		7D54536F25728772004468CD /* FacebookAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuth.swift; sourceTree = "<group>"; };
 		7D942F9E256014BB00C6A0DD /* SwiftUI_Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI_Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D942FA1256014BB00C6A0DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D942FA3256014BB00C6A0DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				7D2C430E256BC1640030F71F /* Utilities */,
 				7D942FD42560155600C6A0DD /* SessionObject.swift */,
 				7D312AFD256B0AF10034177B /* EmailAuth.swift */,
+				7D54534925726D84004468CD /* GoogleAuth.swift */,
+				7D54536F25728772004468CD /* FacebookAuth.swift */,
 			);
 			path = SessionManager;
 			sourceTree = "<group>";
@@ -570,7 +576,9 @@
 				7D36A2D42560419200E622F4 /* OtherView.swift in Sources */,
 				7D942FDD2560172400C6A0DD /* Tabbar.swift in Sources */,
 				7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */,
+				7D54537025728772004468CD /* FacebookAuth.swift in Sources */,
 				7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */,
+				7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */,
 				7D54534225717D78004468CD /* DependencyInjections.swift in Sources */,
 				7D312ADF256AB2A20034177B /* AuthView.swift in Sources */,
 				7D312AA3256957F60034177B /* FBStorageError.swift in Sources */,

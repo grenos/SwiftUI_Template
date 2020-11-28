@@ -7,6 +7,9 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
+import GoogleSignIn
+
 
 enum Coordinator: Hashable {
 	case scrrenOne
@@ -21,26 +24,23 @@ enum StateSlice: Hashable {
 }
 
 
-final class SessionObject: ObservableObject {
-		
-	@Published var test: String
-	// tab navigation
-	@Published var selectedTabItem: TabItem
-	// coordinator
-	@Published var pushedProgrmatically: Bool
-	@Published var pushedScreen: Coordinator?
-	// auth session
-	@Published var user: User?
-	@Published var authListener: AuthStateDidChangeListenerHandle?
+class SessionObject: NSObject, ObservableObject, GIDSignInDelegate {
 	
-	init() {
-		self.test = " default value"
-		// navigation and tabs
-		self.selectedTabItem = TabItem.home
-		self.pushedProgrmatically = false
-		self.pushedScreen = Coordinator.none
-		self.user = nil
-		self.authListener = nil
+	@Published var test: String = "default value"
+	// tab navigation
+	@Published var selectedTabItem: TabItem = TabItem.home
+	// coordinator
+	@Published var pushedProgrmatically: Bool = false
+	@Published var pushedScreen: Coordinator? = Coordinator.none
+	// auth session
+	@Published var user: User? = nil
+	@Published var authListener: AuthStateDidChangeListenerHandle? = nil
+	@Published var isNewUser: Bool = true
+	
+	override init() {
+		super.init()
+		
+		GIDSignIn.sharedInstance().delegate = self
 	}
 	
 	

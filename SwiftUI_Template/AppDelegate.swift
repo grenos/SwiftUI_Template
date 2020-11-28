@@ -16,35 +16,13 @@ let firebaseAuth = Auth.auth()
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	
-	
-	// MARK: Google SignIn
-	@available(iOS 9.0, *)
-	func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
-	-> Bool {
-		return GIDSignIn.sharedInstance().handle(url)
-	}
-
-	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-		if let error = error {
-			print(error.localizedDescription)
-			return
-		}
-	}
-	
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-		if let error = error {
-			print(error.localizedDescription)
-			return
-		}
 	}
 	
-	
-	
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		FirebaseApp.configure()
-	
+		
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 		
@@ -64,7 +42,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		// If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
 		// Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 	}
-
-
 }
 

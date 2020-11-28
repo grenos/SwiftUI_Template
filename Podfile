@@ -14,6 +14,7 @@ target 'SwiftUI_Template' do
 	pod 'Firebase/Storage'
 	pod 'Firebase/Auth'
 	pod 'GoogleSignIn'
+	pod 'FBSDKLoginKit'
 
   target 'SwiftUI_TemplateTests' do
     inherit! :search_paths

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct AuthView: View {
 	
@@ -17,15 +18,17 @@ struct AuthView: View {
 	@State var error = false
 	
 	func signIn () {
-		loading = true
-		error = false
+		self.loading = true
+		self.error = false
 		
 		sessionObject.signIn(email: email, password: password) { result in
 			switch result {
 				case .success(_):
 					self.email = ""
 					self.password = ""
+					self.loading = false
 				case .failure(let error):
+					self.loading = false
 					self.error = true
 					print(error.rawValue)
 			}
@@ -34,8 +37,8 @@ struct AuthView: View {
 	
 	
 	func signUp() {
-		loading = true
-		error = false
+		self.loading = true
+		self.error = false
 		
 		sessionObject.signUp(email: email, password: password) { result in
 			switch result {
@@ -45,12 +48,37 @@ struct AuthView: View {
 							case .success(_):
 								self.email = ""
 								self.password = ""
+								self.loading = false
 							case .failure(let error):
+								self.loading = false
 								self.error = true
 								print(error.rawValue)
 						}
 					}
 				case .failure(let error):
+					self.loading = false
+					self.error = true
+					print(error.rawValue)
+			}
+		}
+	}
+	
+	
+	func googleLogin() {
+		sessionObject.loginWithGoogle()
+	}
+	
+	
+	func facebookLogin() {
+		self.loading = true
+		self.error = false
+		sessionObject.LoginWithFacebook { result in
+			switch result {
+				case .success(_):
+					self.loading = false
+					self.error = false
+				case .failure(let error):
+					self.loading = false
 					self.error = true
 					print(error.rawValue)
 			}
@@ -75,6 +103,17 @@ struct AuthView: View {
 				Text("Sign up")
 			}
 			.padding()
+			
+			
+			Button(action: googleLogin) {
+				Text("Login With Google")
+			}
+			.padding()
+			
+			Button(action: facebookLogin) {
+				Text("Login With Facebook")
+			}
+			.padding()
 		}
 	}
 }
@@ -84,3 +123,4 @@ struct AuthView_Previews: PreviewProvider {
 		AuthView()
 	}
 }
+
