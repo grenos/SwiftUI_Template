@@ -26,6 +26,8 @@ enum StateSlice: Hashable {
 
 class SessionObject: NSObject, ObservableObject, GIDSignInDelegate {
 	
+	var onGoogleSigninCompletion: ((Result<Void.Type, FBAuthError>) -> Void)?
+	
 	@Published var test: String = "default value"
 	// tab navigation
 	@Published var selectedTabItem: TabItem = TabItem.home

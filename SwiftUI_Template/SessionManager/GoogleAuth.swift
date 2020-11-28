@@ -11,16 +11,20 @@ import GoogleSignIn
 
 extension SessionObject {
 	
-	func loginWithGoogle() {
+	func loginWithGoogle(onGoogleSigninCompletion: @escaping (Result<Void.Type, FBAuthError>) -> Void) {
 		GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.first?.rootViewController
 		GIDSignIn.sharedInstance()?.signIn()
+		
+		self.onGoogleSigninCompletion = onGoogleSigninCompletion
 	}
 	
-
+	
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
 		if error != nil{
 			print("Error getting google credentials: \(error.localizedDescription)")
-//			completion(.failure(.genericAuthError))
+			if let callback = self.onGoogleSigninCompletion {
+				callback(.failure(.genericAuthError))
+			}
 			return
 		}
 		
@@ -28,14 +32,18 @@ extension SessionObject {
 		firebaseAuth.signIn(with: credential) { (authResult, error) in
 			guard let user = authResult?.user, error == nil else {
 				print("Error signing in with google: \(error!.localizedDescription)")
-//				completion(.failure(.genericAuthError))
+				if let callback = self.onGoogleSigninCompletion {
+					callback(.failure(.genericAuthError))
+				}
 				return
 			}
 			
 			self.user = user
 			self.isNewUser = ((authResult?.additionalUserInfo?.isNewUser) != nil)
 			Persistence.isGoogleUser = true
-//			completion(.success(Void.self))
+			if let callback = self.onGoogleSigninCompletion {
+				callback(.success(Void.self))
+			}
 		}
 	}
 	

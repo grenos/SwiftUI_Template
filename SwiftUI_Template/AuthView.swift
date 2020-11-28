@@ -65,7 +65,19 @@ struct AuthView: View {
 	
 	
 	func googleLogin() {
-		sessionObject.loginWithGoogle()
+		self.loading = true
+		self.error = false
+		sessionObject.loginWithGoogle { result in
+			switch result {
+				case .success(_):
+					self.loading = false
+					self.error = false
+				case .failure(let error):
+					self.loading = false
+					self.error = true
+					print(error.rawValue)
+			}
+		}
 	}
 	
 	
