@@ -9,6 +9,7 @@ target 'SwiftUI_Template' do
 	pod "Introspect"
 	
 	pod 'Firebase/Analytics'
+	pod 'Firebase/Crashlytics'
 	pod 'FirebaseFirestoreSwift'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'

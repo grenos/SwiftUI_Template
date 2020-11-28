@@ -11,10 +11,7 @@ import Introspect
 struct HomeView: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
-	@AppStorage("isUserLogged") var isUserLogged: Bool?
 		
-	init(){}
-	
 	func willAppear() {
 		// push programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
