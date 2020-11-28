@@ -98,6 +98,23 @@ struct AuthView: View {
 	}
 	
 	
+	func appleSignin() {
+		self.loading = true
+		self.error = false
+		sessionObject.startSignInWithAppleFlow { result in
+			switch result {
+				case .success(_):
+					self.loading = false
+					self.error = false
+				case .failure(let error):
+					self.loading = false
+					self.error = true
+					print(error.rawValue)
+			}
+		}
+	}
+	
+	
 	var body: some View {
 		VStack {
 			TextField("email address", text: $email)
@@ -131,11 +148,7 @@ struct AuthView: View {
 			LoginWithAppleButton()
 				.frame(width: 280, height: 55)
 				.padding()
-				.onTapGesture {
-					sessionObject.startSignInWithAppleFlow { _ in
-						print("SIGN IN WITH APPLE")
-					}
-				}
+				.onTapGesture{ appleSignin() }
 		}
 	}
 }

@@ -16,7 +16,7 @@ extension SessionObject {
 	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
 		return UIApplication.shared.windows.first!
 	}
-		
+	
 	func startSignInWithAppleFlow(onAppleSigninCompletion: @escaping (Result<Void.Type, FBAuthError>) -> Void) {
 		self.onAppleSigninCompletion = onAppleSigninCompletion
 		let nonce = randomNonceString()
@@ -87,25 +87,18 @@ extension SessionObject {
 								callback(.failure(.genericAuthError))
 							}
 						}
-						
 						if let user = authResult?.user {
 							self.user = user
-							
-							print(authResult?.additionalUserInfo?.isNewUser)
-							
 							self.isNewUser = ((authResult?.additionalUserInfo?.isNewUser) != nil)
 							Persistence.isAppleUser = true
-							
 							if let callback = self.onAppleSigninCompletion {
 								callback(.success(Void.self))
 							}
 						}
 					}
 				}
-				
 			}
 		}
-	
 	}
 }
 
