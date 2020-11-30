@@ -15,10 +15,10 @@ struct AppEntry: View {
 	func getUser () {
 		sessionObject.listen()
 	}
-	
+		
 	var body: some View {
 		Group {
-			if (sessionObject.user != nil) {
+			if sessionObject.user != nil {
 				Tabbar()
 //					.transition(.slide)
 //					.animation(.spring())

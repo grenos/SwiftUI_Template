@@ -40,6 +40,7 @@
 		7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD49E525650DD300AC64DE /* FBFirestoreError.swift */; };
 		7DCD4A042565382E00AC64DE /* FBDemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD4A032565382E00AC64DE /* FBDemoModel.swift */; };
 		7DCD4A5C2567AB3700AC64DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */; };
+		7DD24C4125758FCD0021E952 /* SessionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD24C4025758FCD0021E952 /* SessionListener.swift */; };
 		7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17AB4256159C80090CDE8 /* fakeView1.swift */; };
 		7DF17ADD256196510090CDE8 /* FakeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17ADC256196510090CDE8 /* FakeModal.swift */; };
 		7DF17AE2256198120090CDE8 /* MultiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF17AE1256198120090CDE8 /* MultiView.swift */; };
@@ -109,6 +110,7 @@
 		7DCD49E525650DD300AC64DE /* FBFirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBFirestoreError.swift; sourceTree = "<group>"; };
 		7DCD4A032565382E00AC64DE /* FBDemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDemoModel.swift; sourceTree = "<group>"; };
 		7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7DD24C4025758FCD0021E952 /* SessionListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionListener.swift; sourceTree = "<group>"; };
 		7DF17AB4256159C80090CDE8 /* fakeView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fakeView1.swift; sourceTree = "<group>"; };
 		7DF17ADC256196510090CDE8 /* FakeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeModal.swift; sourceTree = "<group>"; };
 		7DF17AE1256198120090CDE8 /* MultiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				7D2C430E256BC1640030F71F /* Utilities */,
 				7D942FD42560155600C6A0DD /* SessionObject.swift */,
+				7DD24C4025758FCD0021E952 /* SessionListener.swift */,
 				7D312AFD256B0AF10034177B /* EmailAuth.swift */,
 				7D54534925726D84004468CD /* GoogleAuth.swift */,
 				7D54536F25728772004468CD /* FacebookAuth.swift */,
@@ -619,6 +622,7 @@
 				7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */,
 				7D54534225717D78004468CD /* DependencyInjections.swift in Sources */,
 				7D312ADF256AB2A20034177B /* AuthView.swift in Sources */,
+				7DD24C4125758FCD0021E952 /* SessionListener.swift in Sources */,
 				7D312AA3256957F60034177B /* FBStorageError.swift in Sources */,
 				7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */,
 				7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */,

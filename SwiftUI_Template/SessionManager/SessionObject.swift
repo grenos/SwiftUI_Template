@@ -23,6 +23,7 @@ enum StateSlice: Hashable {
 	case test
 	case activeTab
 	case pushedProgrmatically
+	case user
 }
 
 
@@ -57,36 +58,17 @@ class SessionObject: NSObject,
 	
 	func setValue<T: Any>(slice: StateSlice, value: T, persist: Bool? = false) {
 		switch slice {
-			
 			case .test:
 				self.test = value as! String
 				if persist! {
 					Persistence.test = value as! String
 				}
-				
 			case .activeTab:
 				self.selectedTabItem = value as! TabItem
-				
 			case .pushedProgrmatically:
 				self.pushedProgrmatically = value as! Bool
-		}
-	}
-	
-	
-	func listen () {
-		authListener = firebaseAuth.addStateDidChangeListener { (auth, user) in
-			if let user = user {
-				self.user = user
-			} else {
-				self.user = nil
-			}
-		}
-	}
-	
-	
-	func unbind () {
-		if let authListener = authListener {
-			firebaseAuth.removeStateDidChangeListener(authListener)
+			default:
+				break
 		}
 	}
 }
