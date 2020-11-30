@@ -63,9 +63,9 @@ extension SessionObject {
 		
 		do {
 			Persistence.isEmailUser = false
-			try firebaseAuth.signOut()
 			self.user = nil
 			self.unbind()
+			try firebaseAuth.signOut()
 		} catch let error {
 			completion(error)
 		}

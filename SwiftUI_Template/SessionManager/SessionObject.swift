@@ -54,21 +54,4 @@ class SessionObject: NSObject,
 		super.init()
 		GIDSignIn.sharedInstance().delegate = self
 	}
-	
-	
-	func setValue<T: Any>(slice: StateSlice, value: T, persist: Bool? = false) {
-		switch slice {
-			case .test:
-				self.test = value as! String
-				if persist! {
-					Persistence.test = value as! String
-				}
-			case .activeTab:
-				self.selectedTabItem = value as! TabItem
-			case .pushedProgrmatically:
-				self.pushedProgrmatically = value as! Bool
-			default:
-				break
-		}
-	}
 }

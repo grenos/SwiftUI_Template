@@ -15,12 +15,12 @@ struct HomeView: View {
 	func willAppear() {
 		// push programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//			sessionObject.setValue(slice: StateSlice.pushedProgrmatically, value: true)
+//		sessionObject.pushedProgrmatically = true
 //		}
 		
 		// pop programatically (can be on any view)
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-//			sessionObject.setValue(slice: StateSlice.pushedProgrmatically, value: false)
+//			sessionObject.pushedProgrmatically = true
 //		}
 	}
 	
@@ -33,12 +33,12 @@ struct HomeView: View {
 				Text(sessionObject.test)
 					.padding()
 					.onTapGesture(perform: {
-						sessionObject.setValue(slice: StateSlice.test, value: "Updated Value, Saved on state and persisted", persist: true)
+						sessionObject.test = "Updated Value and saved on state"
 					})
 				
 				Text("Navigate to tab")
 					.onTapGesture(perform: {
-						sessionObject.setValue(slice: StateSlice.activeTab, value: TabItem.other)
+						sessionObject.selectedTabItem = TabItem.other
 					})
 				
 				Text("SIGN OUT")
