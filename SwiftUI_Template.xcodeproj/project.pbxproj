@@ -25,6 +25,7 @@
 		7D4BCF61257E462500617FE1 /* NetworkParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF60257E462500617FE1 /* NetworkParameters.swift */; };
 		7D4BCF66257E605000617FE1 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF65257E605000617FE1 /* TodoModel.swift */; };
 		7D4BCF6B257E6A7300617FE1 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF6A257E6A7300617FE1 /* PostsModel.swift */; };
+		7D4BCF70257E818000617FE1 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF6F257E818000617FE1 /* DownloadManager.swift */; };
 		7D54533C2571700E004468CD /* ViewLifecycles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54533B2571700E004468CD /* ViewLifecycles.swift */; };
 		7D54534225717D78004468CD /* DependencyInjections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534125717D78004468CD /* DependencyInjections.swift */; };
 		7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534925726D84004468CD /* GoogleAuth.swift */; };
@@ -93,6 +94,7 @@
 		7D4BCF60257E462500617FE1 /* NetworkParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParameters.swift; sourceTree = "<group>"; };
 		7D4BCF65257E605000617FE1 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		7D4BCF6A257E6A7300617FE1 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
+		7D4BCF6F257E818000617FE1 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		7D54533B2571700E004468CD /* ViewLifecycles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLifecycles.swift; sourceTree = "<group>"; };
 		7D54534125717D78004468CD /* DependencyInjections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjections.swift; sourceTree = "<group>"; };
 		7D54534925726D84004468CD /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				7D4BCF33257E414B00617FE1 /* NetworkManager.swift */,
+				7D4BCF6F257E818000617FE1 /* DownloadManager.swift */,
 				7D4BCF5B257E458A00617FE1 /* ErrorHandler.swift */,
 				7D4BCF60257E462500617FE1 /* NetworkParameters.swift */,
 			);
@@ -635,6 +638,7 @@
 				7D4BCF66257E605000617FE1 /* TodoModel.swift in Sources */,
 				7D4BCF5C257E458A00617FE1 /* ErrorHandler.swift in Sources */,
 				7D2C4310256BC1750030F71F /* FBAuthError.swift in Sources */,
+				7D4BCF70257E818000617FE1 /* DownloadManager.swift in Sources */,
 				7DF17AE2256198120090CDE8 /* MultiView.swift in Sources */,
 				7D942FA2256014BB00C6A0DD /* AppDelegate.swift in Sources */,
 				7D54537E2572CD5E004468CD /* AppleAuth.swift in Sources */,
