@@ -20,6 +20,11 @@
 		7D312AFE256B0AF10034177B /* EmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D312AFD256B0AF10034177B /* EmailAuth.swift */; };
 		7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2CE2560347400E622F4 /* UserDefaults.swift */; };
 		7D36A2D42560419200E622F4 /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D36A2D32560419200E622F4 /* OtherView.swift */; };
+		7D4BCF34257E414B00617FE1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF33257E414B00617FE1 /* NetworkManager.swift */; };
+		7D4BCF5C257E458A00617FE1 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF5B257E458A00617FE1 /* ErrorHandler.swift */; };
+		7D4BCF61257E462500617FE1 /* NetworkParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF60257E462500617FE1 /* NetworkParameters.swift */; };
+		7D4BCF66257E605000617FE1 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF65257E605000617FE1 /* TodoModel.swift */; };
+		7D4BCF6B257E6A7300617FE1 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BCF6A257E6A7300617FE1 /* PostsModel.swift */; };
 		7D54533C2571700E004468CD /* ViewLifecycles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54533B2571700E004468CD /* ViewLifecycles.swift */; };
 		7D54534225717D78004468CD /* DependencyInjections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534125717D78004468CD /* DependencyInjections.swift */; };
 		7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54534925726D84004468CD /* GoogleAuth.swift */; };
@@ -83,6 +88,11 @@
 		7D312AFD256B0AF10034177B /* EmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuth.swift; sourceTree = "<group>"; };
 		7D36A2CE2560347400E622F4 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7D36A2D32560419200E622F4 /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
+		7D4BCF33257E414B00617FE1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7D4BCF5B257E458A00617FE1 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		7D4BCF60257E462500617FE1 /* NetworkParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParameters.swift; sourceTree = "<group>"; };
+		7D4BCF65257E605000617FE1 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
+		7D4BCF6A257E6A7300617FE1 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
 		7D54533B2571700E004468CD /* ViewLifecycles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLifecycles.swift; sourceTree = "<group>"; };
 		7D54534125717D78004468CD /* DependencyInjections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjections.swift; sourceTree = "<group>"; };
 		7D54534925726D84004468CD /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
@@ -207,6 +217,16 @@
 			path = SessionManager;
 			sourceTree = "<group>";
 		};
+		7D4BCF29257E412800617FE1 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				7D4BCF33257E414B00617FE1 /* NetworkManager.swift */,
+				7D4BCF5B257E458A00617FE1 /* ErrorHandler.swift */,
+				7D4BCF60257E462500617FE1 /* NetworkParameters.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		7D54534025717D53004468CD /* Wrappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +272,7 @@
 				7D5453822572D343004468CD /* SwiftUI_Template.entitlements */,
 				7DCD4A5B2567AB3700AC64DE /* GoogleService-Info.plist */,
 				7DCD4A0825657F5200AC64DE /* FirebaseServices */,
+				7D4BCF29257E412800617FE1 /* NetworkManager */,
 				7DCD4A602567FBFE00AC64DE /* Models */,
 				7D312AAC25696D9B0034177B /* Utilities */,
 				7D312AF4256B0A860034177B /* SessionManager */,
@@ -333,6 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				7DCD4A032565382E00AC64DE /* FBDemoModel.swift */,
+				7D4BCF65257E605000617FE1 /* TodoModel.swift */,
+				7D4BCF6A257E6A7300617FE1 /* PostsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -609,6 +632,8 @@
 				7D2C4307256B1F4F0030F71F /* PreLaunchView.swift in Sources */,
 				7D54533C2571700E004468CD /* ViewLifecycles.swift in Sources */,
 				7D312AFE256B0AF10034177B /* EmailAuth.swift in Sources */,
+				7D4BCF66257E605000617FE1 /* TodoModel.swift in Sources */,
+				7D4BCF5C257E458A00617FE1 /* ErrorHandler.swift in Sources */,
 				7D2C4310256BC1750030F71F /* FBAuthError.swift in Sources */,
 				7DF17AE2256198120090CDE8 /* MultiView.swift in Sources */,
 				7D942FA2256014BB00C6A0DD /* AppDelegate.swift in Sources */,
@@ -618,13 +643,16 @@
 				7D5453762572A8C7004468CD /* LoginWithAppleButton.swift in Sources */,
 				7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */,
 				7D54537025728772004468CD /* FacebookAuth.swift in Sources */,
+				7D4BCF34257E414B00617FE1 /* NetworkManager.swift in Sources */,
 				7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */,
 				7D54534A25726D84004468CD /* GoogleAuth.swift in Sources */,
+				7D4BCF61257E462500617FE1 /* NetworkParameters.swift in Sources */,
 				7D54534225717D78004468CD /* DependencyInjections.swift in Sources */,
 				7D312ADF256AB2A20034177B /* AuthView.swift in Sources */,
 				7DD24C4125758FCD0021E952 /* SessionListener.swift in Sources */,
 				7D312AA3256957F60034177B /* FBStorageError.swift in Sources */,
 				7DCD49E625650DD300AC64DE /* FBFirestoreError.swift in Sources */,
+				7D4BCF6B257E6A7300617FE1 /* PostsModel.swift in Sources */,
 				7DF17AB5256159C80090CDE8 /* fakeView1.swift in Sources */,
 				7DF17ADD256196510090CDE8 /* FakeModal.swift in Sources */,
 				7D942FE2256018E300C6A0DD /* HomeView.swift in Sources */,

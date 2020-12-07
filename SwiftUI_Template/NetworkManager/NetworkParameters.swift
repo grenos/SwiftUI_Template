@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+
+enum Endpoints: String {
+	case todo = "/todos"
+	case posts = "/posts"
+}
+
+
+struct GetWithParmas: Encodable {
+	var userId: Int
+}

@@ -20,7 +20,6 @@ struct AuthView: View {
 	func signIn () {
 		self.loading = true
 		self.error = false
-		
 		sessionObject.signIn(email: email, password: password) { result in
 			switch result {
 				case .success(_):

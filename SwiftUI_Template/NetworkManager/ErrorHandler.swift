@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+
+// has a value of string and conform to swift's error protocol
+enum GenericNetworkError: String, Error {
+	case genericError = "An error occured. Please try again!"
+}
