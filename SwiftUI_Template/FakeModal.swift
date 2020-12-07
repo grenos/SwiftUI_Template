@@ -54,6 +54,32 @@ struct FakeModal: View {
 		}
 	}
 	
+	
+	func updatePost() {
+		let post = PostsModel(userId: 666, postId: 1, title: "Zhu", body: "Some other lyrics.")
+		NetworkManager.shared.update(with: Endpoints.posts.rawValue, params: post, postId: 1) { result in
+			switch result {
+				case .success(let post):
+					print(post)
+				case .failure(let error):
+					print(error.rawValue)
+			}
+		}
+	}
+	
+	
+	func deletePost() {
+		NetworkManager.shared.delete(with: Endpoints.posts.rawValue, postId: 1) { result in
+			switch result {
+				case .success(_):
+					print("Post deleted")
+				case .failure(let error):
+					print(error.rawValue)
+			}
+		}
+	}
+	
+	
 	var body: some View {
 		NavigationView {
 			VStack {
@@ -76,6 +102,18 @@ struct FakeModal: View {
 					.padding(.bottom, 40)
 					.onTapGesture {
 						postPosts()
+					}
+				
+				Text("PUT - UPDATE")
+					.padding(.bottom, 40)
+					.onTapGesture {
+						updatePost()
+					}
+				
+				Text("DELETE")
+					.padding(.bottom, 40)
+					.onTapGesture {
+						deletePost()
 					}
 				
 				Text("Close Modal")

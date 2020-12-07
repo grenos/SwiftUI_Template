@@ -16,7 +16,7 @@ class NetworkManager {
 	
 	
 	
-	//MARK: - simple get
+	//MARK: - simple GET
 	/**
 	- returns: Todo item
 	- throws: Error of type "GenericNetworkError"
@@ -60,7 +60,7 @@ class NetworkManager {
 	
 	
 	
-	//MARK: - get with params
+	//MARK: - GET with params
 	/**
 	- returns: Array of posts
 	- throws: Error of type "GenericNetworkError"
@@ -112,7 +112,7 @@ class NetworkManager {
 	- endpoint: url endpoint
 	- params: Generic Parameters
 	
-	GET with params
+	POST
 	*/
 	func post<P: Encodable>(with endpoint: String,
 							params: P,
@@ -129,10 +129,99 @@ class NetworkManager {
 				   method: .post,
 				   parameters: params,
 				   encoder: JSONParameterEncoder.default).responseDecodable(of: PostsModel.self) { response in
-			
+					
 					if response.response?.statusCode != 201 {
+						print("error with response status: \(String(describing: response.response?.statusCode))")
+						completion(.failure(.genericError))
+						return
+					}
+					
+					if (response.error != nil) {
+						print("Error getting item: \(String(describing: response.error)))")
+						completion(.failure(.genericError))
+					}
+					else {
+						let post = try! response.result.get()
+						completion(.success(post))
+					}
+				}
+	}
+	
+	
+	
+	
+	//MARK: - PUT
+	/**
+	- returns: Updated post
+	- throws: Error of type "GenericNetworkError"
+	- parameters:
+	- endpoint: url endpoint
+	- params: Generic Parameters
+	- postId: URL params
+	
+	PUT with params and URL params
+	*/
+	func update<P: Encodable>(with endpoint: String,
+							  params: P,
+							  postId: Int,
+							  completion: @escaping(Result<PostsModel, GenericNetworkError>) -> Void)
+	{
+		let url = baseUrl + endpoint + "/\(postId)"
+		
+		guard let validUrl = URL(string: url) else {
+			completion(.failure(.genericError))
+			return
+		}
+		
+		AF.request(validUrl,
+				   method: .put,
+				   parameters: params,
+				   encoder: JSONParameterEncoder.default).responseDecodable(of: PostsModel.self) { response in
+					
+					if response.response?.statusCode != 200 {
+						print("error with response status: \(String(describing: response.response?.statusCode))")
+						print(response)
+						completion(.failure(.genericError))
+						return
+					}
+					
+					if (response.error != nil) {
+						print("Error getting item: \(String(describing: response.error)))")
+						completion(.failure(.genericError))
+					}
+					else {
+						let post = try! response.result.get()
+						completion(.success(post))
+					}
+				}
+	}
+	
+	
+	
+	//MARK: - DELETE
+	/**
+	- returns: Void
+	- throws: Error of type "GenericNetworkError"
+	- parameters:
+	- endpoint: url endpoint
+	- postId: URL params
+	
+	Deletes an item on the server
+	*/
+	func delete(with endpoint: String,
+				postId: Int,
+				completion: @escaping(Result<Void.Type, GenericNetworkError>) -> Void)
+	{
+		let url = baseUrl + endpoint + "/\(postId)"
+		
+		guard let validUrl = URL(string: url) else {
+			completion(.failure(.genericError))
+			return
+		}
+		
+		AF.request(validUrl, method: .delete).response { response in
+			if response.response?.statusCode != 200 {
 				print("error with response status: \(String(describing: response.response?.statusCode))")
-				print(response)
 				completion(.failure(.genericError))
 				return
 			}
@@ -142,8 +231,7 @@ class NetworkManager {
 				completion(.failure(.genericError))
 			}
 			else {
-				let post = try! response.result.get()
-				completion(.success(post))
+				completion(.success(Void.self))
 			}
 		}
 	}
