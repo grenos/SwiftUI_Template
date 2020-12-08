@@ -9,101 +9,95 @@ import SwiftUI
 
 struct MultiView: View {
 	
-	@State private var index = 0
+	@State private var selected = 0
 	
 	var body: some View {
 		
-		VStack {
-			
-				// Tab View...
-				
-				HStack(spacing: 0){
-					
-					Text("First Tab")
-						.foregroundColor(self.index == 0 ? .purple : .white)
-						.fontWeight(.bold)
-						.padding(.vertical,10)
-						.padding(.horizontal,35)
-						.background(Color(.cyan).opacity(self.index == 0 ? 1 : 0))
-						.clipShape(Capsule())
-						.onTapGesture {
-							
-							withAnimation(.default){
-								
-								self.index = 0
-							}
-						}
-					
-					Spacer(minLength: 0)
-					
-					Text("Second Tap")
-						.foregroundColor(index == 1 ? .purple : .white)
-						.fontWeight(.bold)
-						.padding(.vertical,10)
-						.padding(.horizontal,35)
-						.background(Color(.cyan).opacity(index == 1 ? 1 : 0))
-						.clipShape(Capsule())
-						.onTapGesture {
-							
-							withAnimation(.default){
-								
-								self.index = 1
-							}
-						}
-					
-					Spacer(minLength: 0)
-					
-					Text("Thrid Tab")
-						.foregroundColor(index == 2 ? .purple : .white)
-						.fontWeight(.bold)
-						.padding(.vertical,10)
-						.padding(.horizontal,35)
-						.background(Color(.cyan).opacity(index == 2 ? 1 : 0))
-						.clipShape(Capsule())
-						.onTapGesture {
-							
-							withAnimation(.default){
-								
-								self.index = 2
-							}
-						}
-				}
-				.background(Color.orange)
-				.clipShape(Capsule())
-				.padding(.horizontal)
-				.padding(.top,25)
-				
-				
-			
-			
-				TabView(selection: $index) {
-					Text("First Tab").tabItem {
-						Image(systemName: (index == 0 ? "house.fill" : "house"))
-						Text("Home")
-					}
-					.tag(0)
-					
-					Text("Second Tab").tabItem {
-						Image(systemName: (index == 1 ? "plus.circle.fill" : "plus.circle"))
-						Text("Add")
-					}
-					.tag(1)
-					
-					Text("Third Tab").tabItem {
-						Image(systemName: (index == 2 ? "heart.fill" : "heart"))
-						Text("Favorite")
-					}
-					.tag(2)
-				}
+		NavigationView {
+			ZStack {
+				TabNavigationView(selected: $selected)
+				MultiViewPages(selected: $selected)
 			}
-			.tabViewStyle(PageTabViewStyle())
-			.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-			
-			
-			
 		}
 	}
+}
 
+
+struct TabNavigationView: View {
+	
+	@Binding var selected: Int
+	@Namespace private var animation
+	
+	let categories = ["First", "Second", "Third"]
+	
+	var body: some View {
+		VStack() {
+			HStack(spacing: 15){
+				ForEach(categories.indices, id: \.self) { index in
+					let currentCategory = self.categories[index]
+					
+					Button {
+						withAnimation {
+							selected = index
+						}
+					} label: {
+						VStack(spacing: 5) {
+							Text(currentCategory)
+								.font(.system(size: 18))
+								.fontWeight(.semibold)
+								.padding(.bottom, 5)
+								.matchedGeometryEffect(id: index, in: animation, isSource: true)
+						}.accentColor(.primary)
+					}.overlay(
+						RoundedRectangle(cornerRadius: 5)
+							.frame(height: 2)
+							.matchedGeometryEffect(id: selected, in: animation, isSource: false)
+					)
+				}
+				Spacer()
+			}
+			.padding(.leading)
+			.frame(width: Helpers.shared.getScreenSize().width)
+			
+			Spacer()
+		}
+		.navigationTitle("Tabs")
+		.zIndex(2)
+	}
+}
+
+
+
+struct MultiViewPages: View {
+	
+	@Binding var selected: Int
+	
+	var body: some View {
+		VStack {
+			TabView(selection: $selected) {
+				Text("First Tab").tabItem {
+					Image(systemName: (selected == 0 ? "house.fill" : "house"))
+					Text("Home")
+				}
+				.tag(0)
+				
+				Text("Second Tab").tabItem {
+					Image(systemName: (selected == 1 ? "plus.circle.fill" : "plus.circle"))
+					Text("Add")
+				}
+				.tag(1)
+				
+				Text("Third Tab").tabItem {
+					Image(systemName: (selected == 2 ? "heart.fill" : "heart"))
+					Text("Favorite")
+				}
+				.tag(2)
+			}
+		}
+		.tabViewStyle(PageTabViewStyle())
+		.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+	}
+}
 
 
 
