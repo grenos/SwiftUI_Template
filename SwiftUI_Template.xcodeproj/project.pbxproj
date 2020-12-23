@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		636FCF62FF810BD096CA26F7 /* Pods_SwiftUI_TemplateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A260C2A470DB86A712EA801 /* Pods_SwiftUI_TemplateUITests.framework */; };
 		675D2D9606131F52203CF551 /* Pods_SwiftUI_TemplateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF70D1D1352997289232B5C1 /* Pods_SwiftUI_TemplateTests.framework */; };
+		7D2C25B82593E79F004DF916 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C25B72593E79F004DF916 /* Camera.swift */; };
 		7D2C42C4256B1B8F0030F71F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D2C42C3256B1B8F0030F71F /* Color.xcassets */; };
 		7D2C4307256B1F4F0030F71F /* PreLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C4306256B1F4F0030F71F /* PreLaunchView.swift */; };
 		7D2C4310256BC1750030F71F /* FBAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C430F256BC1750030F71F /* FBAuthError.swift */; };
@@ -79,6 +80,7 @@
 		5E6BF36DFFFE34ABA421CD33 /* Pods-SwiftUI_TemplateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUI_TemplateTests.release.xcconfig"; path = "Target Support Files/Pods-SwiftUI_TemplateTests/Pods-SwiftUI_TemplateTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A4DDE63E9A11BB386CE4DF1 /* Pods-SwiftUI_Template.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftUI_Template.release.xcconfig"; path = "Target Support Files/Pods-SwiftUI_Template/Pods-SwiftUI_Template.release.xcconfig"; sourceTree = "<group>"; };
 		761C5632A215E38FAA659DE1 /* Pods_SwiftUI_Template.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftUI_Template.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D2C25B72593E79F004DF916 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		7D2C42C3256B1B8F0030F71F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		7D2C4306256B1F4F0030F71F /* PreLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreLaunchView.swift; sourceTree = "<group>"; };
 		7D2C430F256BC1750030F71F /* FBAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuthError.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				7D2C4306256B1F4F0030F71F /* PreLaunchView.swift */,
 				7D312ADE256AB2A20034177B /* AuthView.swift */,
 				7D942FDC2560172400C6A0DD /* Tabbar.swift */,
+				7D2C25B72593E79F004DF916 /* Camera.swift */,
 				7D312AA725695E4C0034177B /* ImageSelection.swift */,
 				7D942FE1256018E300C6A0DD /* HomeView.swift */,
 				7DF17AE1256198120090CDE8 /* MultiView.swift */,
@@ -649,6 +652,7 @@
 				7D942FDD2560172400C6A0DD /* Tabbar.swift in Sources */,
 				7D5453762572A8C7004468CD /* LoginWithAppleButton.swift in Sources */,
 				7D942FA4256014BB00C6A0DD /* SceneDelegate.swift in Sources */,
+				7D2C25B82593E79F004DF916 /* Camera.swift in Sources */,
 				7D54537025728772004468CD /* FacebookAuth.swift in Sources */,
 				7D4BCF34257E414B00617FE1 /* NetworkManager.swift in Sources */,
 				7D36A2CF2560347400E622F4 /* UserDefaults.swift in Sources */,
