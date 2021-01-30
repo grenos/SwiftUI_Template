@@ -13,20 +13,6 @@ import CryptoKit
 import AuthenticationServices
 
 
-enum Navigator: Hashable {
-	case scrrenOne
-	case scrrenTwo
-	case none
-}
-
-enum StateSlice: Hashable {
-	case test
-	case activeTab
-	case pushedProgrmatically
-	case user
-}
-
-
 class SessionObject: NSObject,
 					 ObservableObject,
 					 GIDSignInDelegate,
@@ -42,7 +28,6 @@ class SessionObject: NSObject,
 	// tab navigation
 	@Published var selectedTabItem: TabItem = TabItem.home
 	// Navigator
-	@Published var pushedScreenToggle: Bool = false
 	@Published var pushedScreen: Navigator? = Navigator.none
 	// auth session
 	@Published var user: User? = nil
