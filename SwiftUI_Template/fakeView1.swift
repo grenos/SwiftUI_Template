@@ -22,10 +22,13 @@ struct fakeView1: View {
 	
 	@Inject var dependency: MyDependency
 	
+	@Binding var testValue: Bool
+	
 	func didAppear() {
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
 //			sessionObject.pushedScreen = Navigator.none
-//		}
+			self.testValue.toggle()
+		}
 	}
 	
 	func didDisappear() {
@@ -76,6 +79,6 @@ struct fakeView1: View {
 
 struct fakeView1_Previews: PreviewProvider {
 	static var previews: some View {
-		fakeView1()
+		fakeView1(testValue: .constant(true))
 	}
 }

@@ -11,6 +11,7 @@ import Introspect
 struct HomeView: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
+	@State private var testValue = false
 	
 	func willAppear() {
 		// push programatically (can be on any view)
@@ -51,6 +52,11 @@ struct HomeView: View {
 					}
 				
 				
+				if testValue {
+					Text("BLAH")
+				}
+				
+				
 				Button("Tap go to fakeVIew1") {
 					sessionObject.pushedScreen = Navigator.scrrenOne
 				}
@@ -61,7 +67,7 @@ struct HomeView: View {
 				// set an active screen on sessionObject
 				// when you want to return to the previous page (also programatically)
 				// set the same sessionObject property to none
-				NavigationLink(destination: fakeView1(),
+				NavigationLink(destination: fakeView1(testValue: $testValue),
 							   tag: Navigator.scrrenOne,
 							   selection: $sessionObject.pushedScreen) {EmptyView()}
 				
