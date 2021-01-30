@@ -21,9 +21,11 @@ struct fakeView1: View {
 	@EnvironmentObject var sessionObject: SessionObject
 	
 	@Inject var dependency: MyDependency
-			
+	
 	func didAppear() {
-		print("Appear")
+//		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//			sessionObject.pushedScreen = Navigator.none
+//		}
 	}
 	
 	func didDisappear() {
@@ -34,13 +36,19 @@ struct fakeView1: View {
 		print("Will Disppear")
 	}
 	
-    var body: some View {
-		NavigationView {
-			VStack {
-				Button("Tap Me", action: dependency.doSomething)
-				Spacer()
-				Text("FAKE VIEW RED")
-					.padding(.bottom, 40)
+	var body: some View {
+		VStack {
+			Button("Tap Me", action: dependency.doSomething)
+			Text("FAKE VIEW RED")
+				.padding(.bottom, 40)
+			
+			
+			NavigationLink(destination: Text("Deep Linked").navigationBarTitle("Deep Linked", displayMode: .inline)) {
+				Rectangle().fill(Color.green).frame(width: 100, height: 100)
+			}
+			
+			NavigationLink(destination: Text("cazzi miei").navigationBarTitle("cazzi miei", displayMode: .inline)) {
+				Rectangle().fill(Color.green).frame(width: 100, height: 100)
 			}
 		}
 		.onAppear { didAppear() }
@@ -67,7 +75,7 @@ struct fakeView1: View {
 }
 
 struct fakeView1_Previews: PreviewProvider {
-    static var previews: some View {
-        fakeView1()
-    }
+	static var previews: some View {
+		fakeView1()
+	}
 }

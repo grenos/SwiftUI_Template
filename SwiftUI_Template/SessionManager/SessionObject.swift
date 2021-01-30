@@ -13,7 +13,7 @@ import CryptoKit
 import AuthenticationServices
 
 
-enum Coordinator: Hashable {
+enum Navigator: Hashable {
 	case scrrenOne
 	case scrrenTwo
 	case none
@@ -41,9 +41,9 @@ class SessionObject: NSObject,
 	@Published var test: String = "default value"
 	// tab navigation
 	@Published var selectedTabItem: TabItem = TabItem.home
-	// coordinator
-	@Published var pushedProgrmatically: Bool = false
-	@Published var pushedScreen: Coordinator? = Coordinator.none
+	// Navigator
+	@Published var pushedScreenToggle: Bool = false
+	@Published var pushedScreen: Navigator? = Navigator.none
 	// auth session
 	@Published var user: User? = nil
 	@Published var authListener: AuthStateDidChangeListenerHandle? = nil

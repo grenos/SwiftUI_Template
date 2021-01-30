@@ -11,17 +11,16 @@ import Introspect
 struct HomeView: View {
 	
 	@EnvironmentObject var sessionObject: SessionObject
-		
+	
 	func willAppear() {
 		// push programatically (can be on any view)
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//		sessionObject.pushedProgrmatically = true
-//		}
+//				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//				sessionObject.pushedScreen = Navigator.scrrenOne
+//				}
 		
 		// pop programatically (can be on any view)
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-//			sessionObject.pushedProgrmatically = true
-//		}
+		//		DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+		//		}
 	}
 	
 	func willDisappear() {
@@ -52,13 +51,23 @@ struct HomeView: View {
 					}
 				
 				
-				// push programatically either from VM or from this view (uncomment on lifecycles)
-				NavigationLink("I can also be pushed programatically from my VM", destination: Text("Pushed programatically"), isActive: $sessionObject.pushedProgrmatically)
+				Button("Tap go to fakeVIew1") {
+					sessionObject.pushedScreen = Navigator.scrrenOne
+				}
+				Button("Tap to go to fakeView2") {
+					sessionObject.pushedScreen = Navigator.scrrenTwo
+				}
+				// programatical navigaton
+				// set an active screen on sessionObject
+				// when you want to return to the previous page (also programatically)
+				// set the same sessionObject property to none
+				NavigationLink(destination: fakeView1(),
+							   tag: Navigator.scrrenOne,
+							   selection: $sessionObject.pushedScreen) {EmptyView()}
 				
-				// for multiple navigation links
-				NavigationLink(destination: fakeView1(), tag: Coordinator.scrrenOne, selection: $sessionObject.pushedScreen) { Rectangle().fill(Color.red).frame(width: 100, height: 100) }
-				
-				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large), tag: Coordinator.scrrenTwo, selection: $sessionObject.pushedScreen) { Rectangle().fill(Color.green).frame(width: 100, height: 100) }
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large),
+							   tag: Navigator.scrrenTwo,
+							   selection: $sessionObject.pushedScreen) {EmptyView()}
 					.isDetailLink(false)
 				
 			}

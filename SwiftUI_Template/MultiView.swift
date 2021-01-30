@@ -14,10 +14,11 @@ struct MultiView: View {
 	var body: some View {
 		
 		NavigationView {
-			ZStack {
-				TabNavigationView(selected: $selected)
+			VStack {
+//				TabNavigationView(selected: $selected)
 				MultiViewPages(selected: $selected)
 			}
+			.navigationTitle("Tabs")
 		}
 	}
 }
@@ -61,8 +62,8 @@ struct TabNavigationView: View {
 			
 			Spacer()
 		}
-		.navigationTitle("Tabs")
-		.zIndex(2)
+//		.navigationTitle("Tabs")
+//		.zIndex(2)
 	}
 }
 
@@ -73,29 +74,27 @@ struct MultiViewPages: View {
 	@Binding var selected: Int
 	
 	var body: some View {
-		VStack {
 			TabView(selection: $selected) {
 				Text("First Tab").tabItem {
-					Image(systemName: (selected == 0 ? "house.fill" : "house"))
 					Text("Home")
 				}
 				.tag(0)
+				.background(Color.red)
 				
 				Text("Second Tab").tabItem {
-					Image(systemName: (selected == 1 ? "plus.circle.fill" : "plus.circle"))
 					Text("Add")
 				}
+				.background(Color.green)
 				.tag(1)
 				
 				Text("Third Tab").tabItem {
-					Image(systemName: (selected == 2 ? "heart.fill" : "heart"))
 					Text("Favorite")
 				}
 				.tag(2)
+				.background(Color.yellow)
 			}
-		}
-		.tabViewStyle(PageTabViewStyle())
-		.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+			.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+			.indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 	}
 }
 
