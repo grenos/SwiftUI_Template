@@ -21,6 +21,8 @@ struct OtherView: View {
 	@State var querySubCollectionListener: ListenerRegistration?
 	@State var lastSnapShotForPagination: QuerySnapshot?
 	
+	@State var newViewShowing: Bool = false
+	
 	func viewWillAppear() {}
 	
 	func viewWillDisappear() {
@@ -155,6 +157,12 @@ struct OtherView: View {
 				
 				
 				
+				NavigationLink(destination: Text("New View"), isActive: $newViewShowing) {
+					EmptyView()
+				}.hidden()
+				
+				
+				
 				Text("Hello, Other!")
 					.navigationBarTitle("Other", displayMode: .inline)
 				
@@ -163,8 +171,8 @@ struct OtherView: View {
 					self.isPresented.toggle()
 				} label: {
 					Text("open modal")
-				}.sheet(isPresented: $isPresented) {
-					FakeModal(isPresented: $isPresented)
+				}.fullScreenCover(isPresented: $isPresented) {
+					FakeModal(isPresented: $isPresented, newViewShowing: $newViewShowing)
 				}
 				.padding()
 				

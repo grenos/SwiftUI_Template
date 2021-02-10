@@ -12,6 +12,7 @@ struct FakeModal: View {
 	@EnvironmentObject var sessionObject: SessionObject
 	
 	@Binding var isPresented: Bool
+	@Binding var newViewShowing: Bool
 	
 	func willAppear() {
 	}
@@ -124,6 +125,23 @@ struct FakeModal: View {
 					}
 				
 				
+				
+				// this will close the current opend modal
+				// returning the user to the previews view
+				// and it will navigate to a new (declared in the previews view)
+				Button("Go to new view") {
+					newViewShowing.toggle()
+					isPresented.toggle()
+				}.padding()
+				
+				
+				// this will navigate to a new inside the modal
+				// turning back from that view returns to the modal
+				// the modal in that case needs to be a fullCover modal
+				NavigationLink(destination: Text("SCREEN TWO").navigationBarTitle("Detail", displayMode: .large)) {
+					Rectangle().fill(Color.green).frame(width: 100, height: 100)
+				}
+								
 			}
 			.onAppear { willAppear() }
 			.onDisappear { willDisappear() }
@@ -136,6 +154,6 @@ struct FakeModal: View {
 
 struct FakeModal_Previews: PreviewProvider {
 	static var previews: some View {
-		FakeModal(isPresented: .constant(true))
+		FakeModal(isPresented: .constant(true), newViewShowing: .constant(true))
 	}
 }
